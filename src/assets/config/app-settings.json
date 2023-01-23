@@ -1,0 +1,10 @@
+{
+  "apiKey": "e7703a34d193edcb92913383165f6093",
+  "apiBaseUrl": "https://gateway.marvel.com:443/v1/public/",
+  "apiRoutes": {
+    "characters": "characters",
+    "comics": "comics",
+    "creators": "creators",
+    "events": "events"
+  }  
+}
