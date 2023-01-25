@@ -1,1 +1,92 @@
-<p>heroes-list works!</p>
+
+<div 
+class="flex flex-wrap justify-content-center gap-5 h-full"
+infiniteScroll
+[infiniteScrollDistance]="1"
+[infiniteScrollThrottle]="100"
+(scrolled)="onScroll()"
+[scrollWindow]="true">
+
+  <!-- Heroes cards -->
+  <div *ngIf="
+  (getHeroesSearchStatus$ | async)
+  && !this.filteredHeroes.length 
+  && !(searchLoading$ | async)" 
+  class="not-found">
+    <img alt="not-found" src="/assets/img/notfound.png" />
+  </div>
+
+  <ng-template ngFor let-hero [ngForOf]="(getHeroesSearchStatus$ | async) ? this.filteredHeroes : this.virtualHeroes">    
+    <p-card styleClass="p-card-shadow" class="hero-card">
+      <ng-template pTemplate="content">
+        <div class="hero-container align-items-center">
+          <div class="hero-name text-center mb-2">
+            <span>{{ hero.name }}</span>
+          </div>
+
+          <div class="hero-image flex justify-content-center mb-5">
+            <p-image
+            [alt]="hero.name"
+            [preview]="true"
+            [src]="hero.thumbnail.path + '.' + hero.thumbnail.extension" />
+          </div>
+
+          <div class="hero-stats flex justify-content-center">
+            <div class="flex flex-row flex-wrap gap-4">
+              <div class="flex">
+                <i class="pi pi-book stats-icon" pBadge [value]="hero.comics.available"></i>
+              </div>
+              <div class="flex">
+                <i class="pi pi-file-word stats-icon" pBadge [value]="hero.stories.available"></i>
+              </div>
+              <div class="flex">
+                <i class="pi pi-calendar stats-icon"pBadge [value]="hero.events.available"></i>
+              </div>
+              <div class="flex">
+                <i class="pi pi-video stats-icon" pBadge [value]="hero.series.available"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    
+      <ng-template pTemplate="footer">
+        <div class="flex justify-content-around mb-3">
+          <button pButton class="p-button-sm p-button-outlined " label="Details" icon="pi pi-eye" (click)="goHeroDetails(hero)"></button>
+          <button pButton class="p-button-sm p-button-success" label="Add to team" icon="pi pi-plus"></button>
+        </div>
+      </ng-template>
+    </p-card>
+  </ng-template>
+
+  <!-- Heroes cards loading -->
+  <ng-template ngFor let-skeleton [ngForOf]="skeletonList">
+    <p-card *ngIf="(getHeroesLoading$ | async) || (searchLoading$ | async)" styleClass="p-card-shadow">
+      <ng-template pTemplate="content">
+        <div class="hero-container">
+          <div class="flex mb-3 justify-content-center">
+            <div>
+              <p-skeleton width="10rem" height="1.5rem" styleClass="mb-2"></p-skeleton>
+            </div>
+          </div>
+          
+          <div class="flex mb-3 justify-content-center">
+            <p-skeleton shape="circle" width="150px" height="150px"></p-skeleton>
+          </div>
+          <div class="flex justify-content-center mt-3 gap-3">
+              <p-skeleton width="2rem" height="2rem"></p-skeleton>
+              <p-skeleton width="2rem" height="2rem"></p-skeleton>
+              <p-skeleton width="2rem" height="2rem"></p-skeleton>
+              <p-skeleton width="2rem" height="2rem"></p-skeleton>
+          </div>
+        </div>
+      </ng-template>    
+      <ng-template pTemplate="footer">
+        <div class="flex justify-content-center mb-3">
+            <p-skeleton width="8rem" height="2rem"></p-skeleton>
+        </div>
+      </ng-template>
+    </p-card>
+  </ng-template>
+
+</div>

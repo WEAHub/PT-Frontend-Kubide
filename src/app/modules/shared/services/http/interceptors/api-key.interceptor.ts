@@ -1,7 +1,7 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { ConfigService } from "../../shared/services/config/config.service";
+import { ConfigService } from "../../config/config.service";
 
 @Injectable()
 export class ApiKeyInterceptor implements HttpInterceptor {

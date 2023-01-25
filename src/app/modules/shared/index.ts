@@ -1,16 +1,13 @@
-import { CommonModule } from "@angular/common";
-import { HttpClientModule } from "@angular/common/http";
+
 import { NgModule } from "@angular/core";
 
-import { SharedServicesModules } from './services'
+import { SharedModulesModule } from "./modules";
+import { SharedServicesModule } from './services'
 
 @NgModule({
-  imports: [
-    HttpClientModule
-  ],
   exports: [
-    CommonModule,
-    SharedServicesModules
+    SharedModulesModule,
+    SharedServicesModule,
   ]
 })
 

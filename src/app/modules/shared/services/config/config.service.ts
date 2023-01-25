@@ -38,4 +38,9 @@ export class ConfigService {
   get apiKey(): string {
     return this.appConfig.apiKey;
   }
+
+  get apiLimit(): number {
+    return this.appConfig.apiLimit;
+  }
+  
 }

@@ -1,13 +1,22 @@
 import { NgModule } from "@angular/core";
+
 import { SkeletonModule } from 'primeng/skeleton';
-import { ScrollerModule } from 'primeng/scroller';
 import { CardModule } from 'primeng/card';
+import { ImageModule } from 'primeng/image';
+import { BadgeModule } from 'primeng/badge';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { MenubarModule } from 'primeng/menubar';
 
 @NgModule({
   exports: [
+    InputTextModule,
     SkeletonModule,
-    ScrollerModule,
-    CardModule
+    CardModule,
+    ImageModule,
+    BadgeModule,
+    ButtonModule,
+    MenubarModule,
   ]
 })
 

@@ -4,25 +4,27 @@ import { EffectsModule } from '@ngrx/effects';
 
 import * as fromHeroes from './store/heroes.reducer';
 
-import { HeroesListComponent } from './components/heroes-list/heroes-list.component';
-import { HeroesTeamComponent } from './components/heroes-team/heroes-team.component';
 import { HeroesComponent } from './components/heroes/heroes.component'
+import { HeroesListComponent } from './components/heroes-list/heroes-list.component';
+import { HeroesSearchComponent } from './components/heroes-search/heroes-search.component';
 
 import { HeroesService } from './services/heroes.service';
 import { HeroesRoutingModule } from './heroes-routing.module';
 import { HeroesEffects } from './store/heroes.effects';
+import { SharedModules } from '../shared';
 
 @NgModule({
   declarations: [
+    HeroesComponent,
     HeroesListComponent,
-    HeroesTeamComponent,
-    HeroesComponent
+    HeroesSearchComponent
   ],
   providers: [
-    HeroesService
+    HeroesService,
   ],
   imports: [
     HeroesRoutingModule,
+    SharedModules,
     StoreModule.forFeature(fromHeroes.featureName, fromHeroes.reducer),
     EffectsModule.forFeature([HeroesEffects])
   ]

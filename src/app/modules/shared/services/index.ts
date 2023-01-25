@@ -15,4 +15,4 @@ import { RequestService } from "./http/http-request.service";
   ]
 })
 
-export class SharedServicesModules { }
+export class SharedServicesModule { }

@@ -1,6 +1,7 @@
 {
-  "apiKey": "e7703a34d193edcb92913383165f6093",
+  "apiKey": "cad4679aaa89de7cbca2fef217a73f9e", 
   "apiBaseUrl": "https://gateway.marvel.com:443/v1/public/",
+  "apiLimit": 20,
   "apiRoutes": {
     "characters": "characters",
     "comics": "comics",

@@ -1,0 +1,14 @@
+<div class="grid">
+  <div class="col-12">
+    <p-menubar [model]="items">
+      
+      <ng-template pTemplate="start">
+        <img routerLink="/" src="assets/img/marvel.svg" height="40" class="mr-2 cursor-pointer">
+      </ng-template>
+
+    </p-menubar>
+  </div>
+  <div class="col-12">
+    <router-outlet></router-outlet>
+  </div>
+</div>

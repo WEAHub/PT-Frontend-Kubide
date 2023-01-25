@@ -9,7 +9,11 @@ const routes: Routes = [
   },
   {
     path: 'heroes',
-    loadChildren: () => import('./modules/heroes/heroes.module').then(m => m.HeroesModule)
+    loadChildren: () => import('../heroes/heroes.module').then(m => m.HeroesModule)
+	},
+  {
+    path: 'team',
+    loadChildren: () => import('../team/team.module').then(m => m.TeamModule)
 	},
 ]
 
@@ -18,4 +22,4 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 
-export class AppRoutingModule { }
+export class CoreRoutingModule { }
