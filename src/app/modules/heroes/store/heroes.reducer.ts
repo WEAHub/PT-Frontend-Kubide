@@ -3,38 +3,36 @@ import { createReducer, on  } from "@ngrx/store";
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { ICharacter, IMarvelResponseData } from "../models/heroes-api.model";
 import * as heroesActions from "./heroes.actions";
+import { HeroesState, heroesAdapter } from "./entities/heroes.entity";
+import { searchAdapter, SearchState } from "./entities/heroes-search.entity";
 
-const featureName = "heroes";
+const featureName = "heroesStore";
 
-interface State extends EntityState<ICharacter>{
-  loading: boolean;
-  error: string;
-  maxHeroesToLoad: number;
-  searchTerm: string;
-  searchResults: ICharacter[];
-  searchLoading: boolean;
-  searching: boolean;
+interface State {
+  heroes: HeroesState,
+  search: SearchState,
   team: [];
   heroDetail: ICharacter;
   heroDetailLoading: boolean;
   heroDetailError: string;
 }
 
-const heroesAdapter: EntityAdapter<ICharacter> = createEntityAdapter<ICharacter>();
-
-const initialState: State = heroesAdapter.getInitialState({
-  loading: false,
-  maxHeroesToLoad: 0,
-  error: '',
-  searching: false,
-  searchTerm: '',
-  searchResults: [],
-  searchLoading: false,
+const initialState: State = {
+  heroes: heroesAdapter.getInitialState({
+    loading: false,
+    maxHeroesToLoad: 0,
+    error: '',
+  }),
+  search: searchAdapter.getInitialState({
+    searching: false,
+    searchTerm: '',
+    searchLoading: false,
+  }),
   team: [],
   heroDetail: <ICharacter>{},
   heroDetailLoading: false,
   heroDetailError: '',
-});
+};
 
 
 const reducer = createReducer(
@@ -48,49 +46,63 @@ const reducer = createReducer(
     }
   }),
   on(heroesActions.heroesLoadSuccess, (state, { heroes, total }) => {
-    return heroesAdapter.addMany(heroes, {
+    return {
       ...state,
-      loading: false,
-      maxHeroesToLoad: total,
-      error: '',
-    })
+      heroes: heroesAdapter.addMany(heroes, { 
+        ...state.heroes,
+        loading: false,
+        maxHeroesToLoad: total,
+        error: '',
+      }),
+    }
   }),
   on(heroesActions.heroesLoadFail, (state, { error }) => {
-    return heroesAdapter.removeAll({
+    return {
       ...state,
+      heroes: heroesAdapter.removeAll({ ...state.heroes}),
       loading: false,
       error: error.message,
-    })
+    }
   }),
   // SEARCH
   on(heroesActions.heroesSearch, (state, { term }) => {
     return {
       ...state,
-      searchTerm: term,
-      searchResults: [],
-      searchLoading: true,
-      searching: true,
+      search: {
+        ...state.search,
+        searchTerm: term,
+        searchLoading: true,
+        searching: true,
+      }
     }
   }),
   on(heroesActions.heroesSearchSuccess, (state, { heroes }) => {
     return {
       ...state,
-      searchResults: heroes,
-      searchLoading: false,
+      search: searchAdapter.addMany(heroes, {
+        ...state.search,
+        searchLoading: false,
+      })
     }
   }),
   on(heroesActions.heroesSearchFail, (state, { error }) => {
     return {
       ...state,
+      search: {
+        ...state.search,
+        searchLoading: false,
+      },
       error: error.message,
-      searchLoading: false,
     }
   }),
   on(heroesActions.heroesSearchClean, (state) => {
     return {
       ...state,
-      searchTerm: '',
-      searching: false,
+      search: {
+        ...state.search,
+        searchTerm: '',
+        searching: false,
+      }
     }
   }),
   // DETAIL
@@ -117,14 +129,26 @@ const reducer = createReducer(
 )
 
 const {
-  selectAll,
-  selectTotal,
+  selectAll: selectHeroesAll,
+  selectTotal: selectHeroesTotal,
 } = heroesAdapter.getSelectors();
+
+const {
+  selectAll: selectSearchAll,
+  selectTotal: selectSearchTotal,
+} = heroesAdapter.getSelectors();
+
+const selectHeroesState = (state: State) => state.heroes;
+const selectSearchState = (state: State) => state.search;
 
 export {
   featureName,
   State,
   reducer,
-  selectAll,
-  selectTotal
+  selectHeroesAll,
+  selectHeroesTotal,
+  selectHeroesState,
+  selectSearchAll,
+  selectSearchTotal,
+  selectSearchState,
 }

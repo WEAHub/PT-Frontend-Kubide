@@ -1,47 +1,52 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { SearchState } from "./entities/heroes-search.entity";
+import { HeroesState } from "./entities/heroes.entity";
 
 import * as fromHeroes from "./heroes.reducer";
 
 const heroesState = createFeatureSelector<fromHeroes.State>(fromHeroes.featureName);
 
+const selectHeroState = createSelector(heroesState, fromHeroes.selectHeroesState);
+const selectSearchState = createSelector(heroesState, fromHeroes.selectSearchState);
+
 const getHeroes = createSelector(
-  heroesState,
-  fromHeroes.selectAll
+  selectHeroState,
+  fromHeroes.selectHeroesAll
 )
 
 const getHeroesCount = createSelector(
-  heroesState,
-  fromHeroes.selectTotal
+  selectHeroState,
+  fromHeroes.selectHeroesTotal
 )
 
 const getHeroesTotal = createSelector(
-  heroesState,
-  (state: fromHeroes.State) => state.maxHeroesToLoad
+  selectHeroState,
+  (state: HeroesState) => state.maxHeroesToLoad
 )
 
 const getHeroesLoading = createSelector(
-  heroesState,
-  (state: fromHeroes.State) => state.loading
+  selectHeroState,
+  (state: HeroesState) => state.loading
 )
 
 const getHeroesSearchTerm = createSelector(
-  heroesState,
-  (state: fromHeroes.State) => state.searchTerm
+  selectSearchState,
+  (state: SearchState) => state.searchTerm
 )
 
 const getHeroesSearch = createSelector(
-  heroesState,
-  (state: fromHeroes.State) => state.searchResults
+  selectSearchState,
+  fromHeroes.selectSearchAll
 )
 
 const getHeroesSearchLoading = createSelector(
-  heroesState,
-  (state: fromHeroes.State) => state.searchLoading
+  selectSearchState,
+  (state: SearchState) => state.searchLoading
 )
 
 const getHeroesSearchStatus = createSelector(
-  heroesState,
-  (state: fromHeroes.State) => state.searching
+  selectSearchState,
+  (state: SearchState) => state.searching
 )
 
 export {
