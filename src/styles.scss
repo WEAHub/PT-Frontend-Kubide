@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "Marvel";
+  src: local("Marvel"), url(./assets/fonts/Marvel-Regular.ttf) format("truetype");
+}
+
+body {
+  font-size: 13px;
+  background-color: var(--surface-ground);
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #5e6d9c #ffffff;
+}
+
+*::-webkit-scrollbar {
+  width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--surface-ground);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #5e6d9c;
+  border-radius: 10px;
+  border: 3px solid #ffffff;
+}
