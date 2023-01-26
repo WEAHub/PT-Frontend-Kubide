@@ -1,0 +1,10 @@
+<div class="comic-container">
+  <div class="comic-image cursor-pointer" (click)="openUrl(comic)">
+    <p-image
+    [alt]="comic.description"
+    [src]="comic.thumbnail.path + '.' + comic.thumbnail.extension" />
+  </div>
+  <div class="comic-title">
+    <span class="white-space-nowrap text-overflow-ellipsis block overflow-hidden">{{ comic.title }}</span>
+  </div>
+</div>

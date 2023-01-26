@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { MessageService } from 'primeng/api';
 
 import { skip, Subscription, take } from 'rxjs';
 import { ConfigService } from 'src/app/modules/shared/services/config/config.service';
@@ -31,6 +32,10 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   totalHeroes!: number
   skeletonList: number[] = new Array(this.configService.apiLimit);
 
+  searching: boolean = false;
+  getSearchStatusSub: Subscription = this.getHeroesSearchStatus$
+  .subscribe(searching => this.searching = searching)
+
   getHeroesSub: Subscription = this.getHeroes$
   .subscribe((heroes: ICharacter[]) => {
     if(!heroes.length) return
@@ -40,6 +45,9 @@ export class HeroesListComponent implements OnInit, OnDestroy {
       .subscribe(total => this.totalHeroes = total)
     }
     this.virtualHeroes = heroes
+
+    const message = `${this.virtualHeroes.length} of ${this.totalHeroes} Heroes`
+    this.showMessage(message)
   })
 
   getHeroesSearch: Subscription = this.getHeroesSearch$
@@ -51,6 +59,7 @@ export class HeroesListComponent implements OnInit, OnDestroy {
     private configService: ConfigService,
     private router: Router,
     private store: Store<{ heroes: State }>,
+    private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -74,6 +83,7 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.getHeroesSub.unsubscribe();
     this.getHeroesSearch.unsubscribe();
+    this.getSearchStatusSub.unsubscribe();
   }
 
   loadHeroes(): void {
@@ -81,6 +91,7 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   }
 
   onScroll(): void {
+    if(this.searching) return
     this.store.select(getHeroesCount)
     .pipe(take(1))
     .subscribe(count => {
@@ -91,7 +102,11 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   }
 
   goHeroDetails(hero: ICharacter) {
-    this.router.navigate(['heroes/' + hero.id])
+    this.router.navigate(['/heroes/' + hero.id])
   }
-
+  
+  showMessage(message: string): void {
+    this.messageService.clear('br');
+    this.messageService.add({key: 'br', severity:'', summary: 'Loaded', detail: message});
+  }
 }

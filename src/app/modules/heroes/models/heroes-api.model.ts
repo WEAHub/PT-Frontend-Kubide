@@ -10,7 +10,9 @@ interface IUrl {
 
 interface ICollection {
   available: string;
+  items: []
 }
+
 
 interface ICharacter {
   id: number;
@@ -24,6 +26,53 @@ interface ICharacter {
   series: ICollection;
 }
 
+interface IPrice {
+  price: number;
+  type: string;
+}
+
+interface ITextObjects {
+  price: number;
+  language: string;
+  text: string;
+}
+
+interface IComic {
+  id: number,
+  characters: ICollection;
+  creators: ICollection;
+  prices: IPrice[];
+  format: string;
+  modified: string;
+  thumbnail: IThumbnail;
+  description: string;
+  textobjects: ITextObjects[];
+  title: string;
+  urls: IUrls[];
+}
+
+interface ISerie {
+  id: number;
+  urls: IUrls[];
+  title: string;
+  thumbnail: IThumbnail;
+}
+
+interface IUrls {
+  type: string;
+  url: string;
+}
+
+interface IStory {
+  id: number;
+  title: string;
+  description: string;
+  thumbnail: IThumbnail;
+  modified: string;
+  characters: ICollection;
+  type: string;
+  creators: ICollection;
+}
 
 interface IMarvelResponseData<T> {
   total: number;
@@ -38,4 +87,7 @@ export {
   IMarvelResponse,
   IMarvelResponseData,
   ICharacter,
+  IComic,
+  IStory,
+  ISerie
 }

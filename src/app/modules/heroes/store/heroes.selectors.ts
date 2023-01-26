@@ -9,6 +9,11 @@ const heroesState = createFeatureSelector<fromHeroes.State>(fromHeroes.featureNa
 const selectHeroState = createSelector(heroesState, fromHeroes.selectHeroesState);
 const selectSearchState = createSelector(heroesState, fromHeroes.selectSearchState);
 
+/**
+ *  Heroes List
+ *  Path: /heroes
+ */
+
 const getHeroes = createSelector(
   selectHeroState,
   fromHeroes.selectHeroesAll
@@ -34,6 +39,11 @@ const getHeroesSearchTerm = createSelector(
   (state: SearchState) => state.term
 )
 
+/**
+ *  Heroes Search
+ *  Path: /heroes
+ */
+
 const getHeroesSearch = createSelector(
   selectSearchState,
   fromHeroes.selectSearchAll
@@ -49,13 +59,52 @@ const getHeroesSearchStatus = createSelector(
   (state: SearchState) => state.searching
 )
 
+
+/**
+ *  Heroes Details
+ *  Path: /heroes/:id
+ */
+
+const getHeroDetail = createSelector(
+  heroesState,
+  (state: fromHeroes.State) => state.heroDetail.hero
+)
+
+const getHeroDetailLoading = createSelector(
+  heroesState,
+  (state: fromHeroes.State) => state.heroDetail.loading
+)
+
+const getHeroDetailError = createSelector(
+  heroesState,
+  (state: fromHeroes.State) => state.heroDetail.error
+)
+
+const getHeroDetailComics = createSelector(
+  heroesState,
+  (state: fromHeroes.State) => state.heroDetail.comics
+)
+
+const getHeroDetailSeries = createSelector(
+  heroesState,
+  (state: fromHeroes.State) => state.heroDetail.series
+)
+
 export {
   getHeroes,
+  
   getHeroesLoading,
   getHeroesCount,
   getHeroesTotal,
+
   getHeroesSearch,
   getHeroesSearchTerm,
   getHeroesSearchLoading,
-  getHeroesSearchStatus
+  getHeroesSearchStatus,
+
+  getHeroDetail,
+  getHeroDetailLoading,
+  getHeroDetailError,
+  getHeroDetailComics,
+  getHeroDetailSeries
 }

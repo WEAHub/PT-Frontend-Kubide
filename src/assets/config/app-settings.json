@@ -6,6 +6,8 @@
     "characters": "characters",
     "comics": "comics",
     "creators": "creators",
-    "events": "events"
+    "events": "events",
+    "stories": "stories",
+    "series": "series"
   }  
 }

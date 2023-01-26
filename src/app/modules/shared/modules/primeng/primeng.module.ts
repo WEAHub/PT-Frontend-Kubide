@@ -7,6 +7,11 @@ import { BadgeModule } from 'primeng/badge';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenubarModule } from 'primeng/menubar';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from "primeng/api";
+import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { TabViewModule } from 'primeng/tabview';
+import { CarouselModule } from 'primeng/carousel';
 
 @NgModule({
   exports: [
@@ -17,6 +22,13 @@ import { MenubarModule } from 'primeng/menubar';
     BadgeModule,
     ButtonModule,
     MenubarModule,
+    ToastModule,
+    ScrollPanelModule,
+    TabViewModule,
+    CarouselModule
+  ],
+  providers: [
+    MessageService
   ]
 })
 

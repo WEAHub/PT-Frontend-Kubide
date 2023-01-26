@@ -1,3 +1,4 @@
+<p-toast styleClass="toast-message" position="bottom-right" key="br" life="500"></p-toast>
 
 <div 
 class="flex flex-wrap justify-content-center gap-5 h-full"
@@ -20,6 +21,7 @@ infiniteScroll
   <ng-template ngFor let-hero [ngForOf]="(getHeroesSearchStatus$ | async) ? this.filteredHeroes : this.virtualHeroes">    
     <p-card styleClass="p-card-shadow" class="hero-card">
       <ng-template pTemplate="content">
+
         <div class="hero-container align-items-center">
           <div class="hero-name text-center mb-2">
             <span>{{ hero.name }}</span>
@@ -34,26 +36,19 @@ infiniteScroll
 
           <div class="hero-stats flex justify-content-center">
             <div class="flex flex-row flex-wrap gap-4">
-              <div class="flex">
-                <i class="pi pi-book stats-icon" pBadge [value]="hero.comics.available"></i>
-              </div>
-              <div class="flex">
-                <i class="pi pi-file-word stats-icon" pBadge [value]="hero.stories.available"></i>
-              </div>
-              <div class="flex">
-                <i class="pi pi-calendar stats-icon"pBadge [value]="hero.events.available"></i>
-              </div>
-              <div class="flex">
-                <i class="pi pi-video stats-icon" pBadge [value]="hero.series.available"></i>
-              </div>
+              <i class="pi pi-book stats-icon" pBadge [value]="hero.comics.available"></i>
+              <i class="pi pi-file-word stats-icon" pBadge [value]="hero.stories.available"></i>
+              <i class="pi pi-calendar stats-icon"pBadge [value]="hero.events.available"></i>
+              <i class="pi pi-video stats-icon" pBadge [value]="hero.series.available"></i>
             </div>
           </div>
         </div>
+
       </ng-template>
     
       <ng-template pTemplate="footer">
         <div class="flex justify-content-around mb-3">
-          <button pButton class="p-button-sm p-button-outlined " label="Details" icon="pi pi-eye" (click)="goHeroDetails(hero)"></button>
+          <button pButton class="p-button-sm p-button-outlined" label="Details" icon="pi pi-eye" (click)="goHeroDetails(hero)"></button>
           <button pButton class="p-button-sm p-button-success" label="Add to team" icon="pi pi-plus"></button>
         </div>
       </ng-template>

@@ -1,6 +1,6 @@
 import { Action, createAction, props } from '@ngrx/store';
 import { IHTTPErrorResponse } from '../../shared/services/models/http-responses.model';
-import { ICharacter, IMarvelResponseData } from '../models/heroes-api.model';
+import { ICharacter, IComic, IMarvelResponseData, ISerie, IStory } from '../models/heroes-api.model';
 
 enum heroesActions {
   LOAD_HEROES = '[LOAD] Load heroes',
@@ -60,7 +60,11 @@ const heroesDetail = createAction(
 
 const heroesDetailSuccess = createAction(
   heroesActions.DETAIL_HEROES_SUCCESS,
-  props<{ hero: ICharacter }>()
+  props<{ 
+    hero: ICharacter, 
+    comics: IComic[],
+    series: ISerie[]
+  }>()
 )
 
 const heroesDetailFail = createAction(
@@ -73,10 +77,12 @@ export {
   heroesLoad,
   heroesLoadSuccess,
   heroesLoadFail,
+
   heroesSearch,
   heroesSearchSuccess,
   heroesSearchFail,
   heroesSearchClean,
+
   heroesDetail,
   heroesDetailSuccess,
   heroesDetailFail

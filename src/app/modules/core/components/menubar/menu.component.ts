@@ -14,17 +14,13 @@ export class CoreMenuComponent {
       label: 'Heroes',
       icon: 'pi pi-list',
       routerLink: ['/heroes'],
-      routerLinkActiveOptions: {
-        exact: true 
-      },
+      routerLinkActiveOptions: { exact: true },
     },
     {
       label: 'Team',
       icon: 'pi pi-users',
       routerLink: ['/team'],
-      routerLinkActiveOptions: {
-        exact: true
-      },
+      routerLinkActiveOptions: { exact: true },
     }
   ];
 

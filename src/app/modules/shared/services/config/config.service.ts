@@ -35,6 +35,22 @@ export class ConfigService {
     return this.apiBaseUrl + this.appConfig.apiRoutes.characters;
   }
 
+  get apiGetComics(): string {
+    return this.appConfig.apiRoutes.comics;
+  }
+
+  get apiGetStories(): string {
+    return this.appConfig.apiRoutes.stories;
+  }
+
+  get apiGetEvents(): string {
+    return this.appConfig.apiRoutes.events;
+  }
+
+  get apiGetSeries(): string {
+    return this.appConfig.apiRoutes.series;
+  }
+
   get apiKey(): string {
     return this.appConfig.apiKey;
   }

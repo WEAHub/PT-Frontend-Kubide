@@ -1,7 +1,6 @@
 
 import { createReducer, on  } from "@ngrx/store";
-import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { ICharacter, IMarvelResponseData } from "../models/heroes-api.model";
+import { ICharacter, IComic, ISerie } from "../models/heroes-api.model";
 import * as heroesActions from "./heroes.actions";
 import { HeroesState, heroesAdapter } from "./entities/heroes.entity";
 import { searchAdapter, SearchState } from "./entities/heroes-search.entity";
@@ -9,12 +8,15 @@ import { searchAdapter, SearchState } from "./entities/heroes-search.entity";
 const featureName = "heroesStore";
 
 interface State {
-  heroes: HeroesState,
-  search: SearchState,
-  team: [];
-  heroDetail: ICharacter;
-  heroDetailLoading: boolean;
-  heroDetailError: string;
+  heroes: HeroesState;
+  search: SearchState;
+  heroDetail: {
+    hero: ICharacter;
+    comics: IComic[];
+    series: ISerie[];
+    loading: boolean;
+    error: string;
+  }
 }
 
 const initialState: State = {
@@ -28,10 +30,13 @@ const initialState: State = {
     searching: false,
     term: '',
   }),
-  team: [],
-  heroDetail: <ICharacter>{},
-  heroDetailLoading: false,
-  heroDetailError: '',
+  heroDetail: {
+    hero: <ICharacter>{},
+    comics: <IComic[]>[],
+    series: <ISerie[]>[],
+    loading: false,
+    error: '',
+  }
 };
 
 
@@ -71,12 +76,12 @@ const reducer = createReducer(
   on(heroesActions.heroesSearch, (state, { term }) => {
     return {
       ...state,
-      search: {
+      search: searchAdapter.removeAll({
         ...state.search,
         term: term,
         loading: true,
         searching: true,
-      }
+      }),
     }
   }),
   on(heroesActions.heroesSearchSuccess, (state, { heroes }) => {
@@ -91,42 +96,60 @@ const reducer = createReducer(
   on(heroesActions.heroesSearchFail, (state, { error }) => {
     return {
       ...state,
-      search: {
+      search: searchAdapter.removeAll({
         ...state.search,
         loading: false,
-      },
+      }),
       error: error.message,
     }
   }),
   on(heroesActions.heroesSearchClean, (state) => {
     return {
       ...state,
-      search: {
+      search: searchAdapter.removeAll({
         ...state.search,
         term: '',
         searching: false,
-      }
+      }),
     }
   }),
   // DETAIL
   on(heroesActions.heroesDetail, (state) => {
     return {
       ...state,
-      heroDetailLoading: true,
+      heroDetail: {
+        ...state.heroDetail,
+        hero: <ICharacter>{},
+        comics: <IComic[]>[],
+        serie: <ISerie[]>[],
+        loading: true,
+      }
     }
   }),
-  on(heroesActions.heroesDetailSuccess, (state, { hero }) => {
+  on(heroesActions.heroesDetailSuccess, (state, { hero, comics, series }) => {
     return {
       ...state,
-      heroDetail: hero,
-      heroDetailLoading: false
+      heroDetail: {
+        ...state.heroDetail,
+        hero,
+        comics,
+        series,
+        loading: false,
+        error: '',
+      }
     }
   }),
   on(heroesActions.heroesDetailFail, (state, { error }) => {
     return {
       ...state,
-      heroDetailError: error.message,
-      heroDetailLoading: false
+      heroDetail: {
+        ...state.heroDetail,
+        hero: <ICharacter>{},
+        comics: <IComic[]>[],
+        serie: <ISerie[]>[],
+        loading: false,
+        error: error.message,
+      }
     }
   })
 )
