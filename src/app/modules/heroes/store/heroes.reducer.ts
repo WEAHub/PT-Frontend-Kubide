@@ -41,8 +41,11 @@ const reducer = createReducer(
   on(heroesActions.heroesLoad, (state) => {
     return {
       ...state,
-      loading: true,
-      error: '',
+      heroes: {
+        ...state.heroes,
+        loading: true,
+        error: ''
+      },
     }
   }),
   on(heroesActions.heroesLoadSuccess, (state, { heroes, total }) => {

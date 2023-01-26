@@ -6,8 +6,8 @@ infiniteScroll
 [infiniteScrollThrottle]="100"
 (scrolled)="onScroll()"
 [scrollWindow]="true">
-
-  <!-- Heroes cards -->
+  
+  <!-- Search not found -->
   <div *ngIf="
   (getHeroesSearchStatus$ | async)
   && !this.filteredHeroes.length 
@@ -16,6 +16,7 @@ infiniteScroll
     <img alt="not-found" src="/assets/img/notfound.png" />
   </div>
 
+  <!-- Heroes cards -->
   <ng-template ngFor let-hero [ngForOf]="(getHeroesSearchStatus$ | async) ? this.filteredHeroes : this.virtualHeroes">    
     <p-card styleClass="p-card-shadow" class="hero-card">
       <ng-template pTemplate="content">
