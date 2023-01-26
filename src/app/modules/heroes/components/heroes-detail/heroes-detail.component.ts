@@ -13,8 +13,6 @@ import * as heroesActions from '../../store/heroes.actions';
 
 export class HeroesDetailComponent {
 
-
-
   constructor(
     private store: Store<{ heroes: State }>,
     private route: ActivatedRoute,

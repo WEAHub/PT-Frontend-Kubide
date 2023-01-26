@@ -24,9 +24,9 @@ const initialState: State = {
     error: '',
   }),
   search: searchAdapter.getInitialState({
+    loading: false,
     searching: false,
-    searchTerm: '',
-    searchLoading: false,
+    term: '',
   }),
   team: [],
   heroDetail: <ICharacter>{},
@@ -70,8 +70,8 @@ const reducer = createReducer(
       ...state,
       search: {
         ...state.search,
-        searchTerm: term,
-        searchLoading: true,
+        term: term,
+        loading: true,
         searching: true,
       }
     }
@@ -81,7 +81,7 @@ const reducer = createReducer(
       ...state,
       search: searchAdapter.addMany(heroes, {
         ...state.search,
-        searchLoading: false,
+        loading: false,
       })
     }
   }),
@@ -90,7 +90,7 @@ const reducer = createReducer(
       ...state,
       search: {
         ...state.search,
-        searchLoading: false,
+        loading: false,
       },
       error: error.message,
     }
@@ -100,7 +100,7 @@ const reducer = createReducer(
       ...state,
       search: {
         ...state.search,
-        searchTerm: '',
+        term: '',
         searching: false,
       }
     }

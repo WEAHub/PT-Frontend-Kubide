@@ -4,7 +4,7 @@ import { TeamListComponent } from './components/team-list/team-list.component';
 
 const routes: Routes = [
   { 
-		path: '', 
+		path: 'team', 
 		component: TeamListComponent,
 	},
 ]

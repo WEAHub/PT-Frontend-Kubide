@@ -13,22 +13,23 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreRoutingModule } from './modules/core/core-routing.module';
 import { CoreComponent } from './modules/core/core.component';
 import { CoreMenuComponent } from './modules/core/components/menubar/menu.component';
+import { CoreHomeComponent } from './modules/core/components/home/home.component';
 
 import { Modules } from './modules'
 
 import { environment } from '../environments/environment';
 
-
 @NgModule({
   declarations: [
     CoreComponent,
-    CoreMenuComponent
+    CoreMenuComponent,
+    CoreHomeComponent
   ],
   imports: [
     Modules,
+    CoreRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
-    CoreRoutingModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({

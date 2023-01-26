@@ -31,7 +31,7 @@ const getHeroesLoading = createSelector(
 
 const getHeroesSearchTerm = createSelector(
   selectSearchState,
-  (state: SearchState) => state.searchTerm
+  (state: SearchState) => state.term
 )
 
 const getHeroesSearch = createSelector(
@@ -41,7 +41,7 @@ const getHeroesSearch = createSelector(
 
 const getHeroesSearchLoading = createSelector(
   selectSearchState,
-  (state: SearchState) => state.searchLoading
+  (state: SearchState) => state.loading
 )
 
 const getHeroesSearchStatus = createSelector(

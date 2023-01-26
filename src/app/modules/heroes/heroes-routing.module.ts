@@ -5,8 +5,7 @@ import { HeroesComponent } from './components/heroes/heroes.component';
 
 const routes: Routes = [
   { 
-		path: '',
-		pathMatch: 'full',
+		path: 'heroes',
 		component: HeroesComponent,
 	},
   { 
