@@ -36,10 +36,10 @@ infiniteScroll
 
           <div class="hero-stats flex justify-content-center">
             <div class="flex flex-row flex-wrap gap-4">
-              <i class="pi pi-book stats-icon" pBadge [value]="hero.comics.available"></i>
-              <i class="pi pi-file-word stats-icon" pBadge [value]="hero.stories.available"></i>
-              <i class="pi pi-calendar stats-icon"pBadge [value]="hero.events.available"></i>
-              <i class="pi pi-video stats-icon" pBadge [value]="hero.series.available"></i>
+              <i class="pi pi-book stats-icon" [pTooltip]="hero.comics.available + ' Comics'" tooltipPosition="top" pBadge [value]="hero.comics.available"></i>
+              <i class="pi pi-file-word stats-icon" [pTooltip]="hero.stories.available + ' Stories'" tooltipPosition="top" pBadge [value]="hero.stories.available"></i>
+              <i class="pi pi-calendar stats-icon" [pTooltip]="hero.events.available + ' Events'" tooltipPosition="top" pBadge [value]="hero.events.available"></i>
+              <i class="pi pi-video stats-icon" [pTooltip]="hero.series.available + ' Series'" tooltipPosition="top" pBadge [value]="hero.series.available"></i>
             </div>
           </div>
         </div>

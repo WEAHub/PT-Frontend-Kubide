@@ -12,6 +12,8 @@ import { MessageService } from "primeng/api";
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { TabViewModule } from 'primeng/tabview';
 import { CarouselModule } from 'primeng/carousel';
+import { AvatarModule } from 'primeng/avatar';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   exports: [
@@ -25,7 +27,9 @@ import { CarouselModule } from 'primeng/carousel';
     ToastModule,
     ScrollPanelModule,
     TabViewModule,
-    CarouselModule
+    CarouselModule,
+    AvatarModule,
+    TooltipModule
   ],
   providers: [
     MessageService
