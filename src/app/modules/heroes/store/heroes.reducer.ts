@@ -75,7 +75,8 @@ const reducer = createReducer(
   on(heroesActions.heroSetTeam, (state, { id, changes }) => {
     return {
       ...state,
-      heroes: heroesAdapter.updateOne({id, changes}, { ...state.heroes}),
+      heroes: heroesAdapter.updateOne({id, changes}, { ...state.heroes }),
+      search: searchAdapter.updateOne({id, changes}, { ...state.search }),
       heroDetail: {
         ...state.heroDetail,
         hero: {

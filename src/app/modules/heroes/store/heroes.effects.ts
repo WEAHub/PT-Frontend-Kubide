@@ -37,9 +37,17 @@ export class HeroesEffects {
 
 	heroesSearch$ = createEffect(() => this.actions$.pipe(
 		ofType(heroesActions.heroesSearch),
-		switchMap((params) => this.heroesService.searchHero(params.term).pipe(
+		withLatestFrom(
+			this.store.select(getTeam)
+		),
+		exhaustMap(([params, team]: [any, any[]]) => this.heroesService.searchHero(params.term).pipe(
 			map((heroes: IMarvelResponse<ICharacter>) => heroesActions.heroesSearchSuccess({
-         heroes: heroes.data.results
+         heroes: heroes.data.results.map(hero => {
+					return {
+						...hero,
+						inTeam: team.find(teamHero => teamHero.id === hero.id) !== undefined
+					}
+				})
       })),
 			catchError((error: IHTTPErrorResponse) => of(heroesActions.heroesSearchFail({ error })))
 		))
