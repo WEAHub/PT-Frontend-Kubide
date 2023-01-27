@@ -14,6 +14,8 @@ import { ITeamCharacter } from "../../team/models/team.model";
 
 export class HeroesEffects {
 	
+
+	// Necesitamos traernos el equipo para flagear los heroes que llegan { inTeam: true }
 	heroesLoad$ = createEffect(() => this.actions$.pipe(
 		ofType(heroesActions.heroesLoad),
 		withLatestFrom(
@@ -24,7 +26,7 @@ export class HeroesEffects {
         heroes: heroes.data.results.map(hero => {
 					return {
 						...hero,
-						inTeam: team.find(teamHero => teamHero.id === hero.id)
+						inTeam: team.find(teamHero => teamHero.id === hero.id) !== undefined
 					}
 				}),
         total: heroes.data.total
@@ -50,8 +52,14 @@ export class HeroesEffects {
 			this.heroesService.getComicsByHeroId(params.heroId).pipe(comics => comics),
 			this.heroesService.getSeriesByHeroId(params.heroId).pipe(series => series),
 		])),
-		map(data => heroesActions.heroesDetailSuccess({
-			hero: data[0].data.results[0],
+		withLatestFrom(
+			this.store.select(getTeam)
+		),
+		map(([data, team]: [any, any[]]) => heroesActions.heroesDetailSuccess({
+			hero: {
+				...data[0].data.results[0],
+				inTeam: team.find(heroTeam => heroTeam.id === data[0].data.results[0].id) !== undefined
+			},
 			comics: data[1].data.results,
 			series: data[2].data.results
 		})),

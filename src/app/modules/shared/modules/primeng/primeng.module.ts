@@ -15,6 +15,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { AvatarModule } from 'primeng/avatar';
 import { TooltipModule } from 'primeng/tooltip';
 import { TableModule } from 'primeng/table';
+import { InplaceModule } from 'primeng/inplace';
 
 @NgModule({
   exports: [
@@ -31,7 +32,8 @@ import { TableModule } from 'primeng/table';
     CarouselModule,
     AvatarModule,
     TooltipModule,
-    TableModule
+    TableModule,
+    InplaceModule
   ],
   providers: [
     MessageService

@@ -20,7 +20,6 @@ export class StorageService {
 
   loadTeam(): Observable<ITeamCharacter[]> {
     const team = JSON.parse(localStorage.getItem(this.teamKey)!) as ITeamCharacter[];
-    console.log(team)
     return of(team)
   }
   

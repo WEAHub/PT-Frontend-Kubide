@@ -13,13 +13,13 @@
   .toast-message {
     background: white;
   }
-  
+
   .hero-image {
 
 
     .p-element {
       border-radius: 50%;
-      overflow: hidden;
+      overflow: visible;
       height: calc(100% - 4px)
     }
     .p-element > .p-image > img {

@@ -47,11 +47,13 @@
           <div class="lg:col-4 md:col-4 sm:col-12">
             <div class="thumbnail flex justify-content-center">
               <p-image
+              imageClass="shadow-3"
               [alt]="hero.name"
               [preview]="true"
               [src]="hero.thumbnail.path + '.' + hero.thumbnail.extension" />
             </div>
-            <button pButton class="mt-2 w-full p-button-sm p-button-success hidden md:block lg:block" label="Add to team" icon="pi pi-plus"></button>
+            <button *ngIf="!hero.inTeam" pButton class="mt-2 w-full p-button-sm p-button-success hidden md:block lg:block" label="Add to team" icon="pi pi-plus" (click)="addTeamHero(hero)"></button>
+            <button *ngIf="hero.inTeam" pButton class=" mt-2 w-full p-button-sm p-button-danger p-button-outlined hidden md:block lg:block" icon="pi pi-trash" label="Remove" (click)="removeFromTeam(hero)"></button>
           </div>
           <div class="lg:col-8 md:col-8 sm:col-12 hero-info">
             <div class="hero-name text-center md:text-left lg:text-left mt-2 md:mt-0 lg:md-0">{{ hero.name }}</div>
@@ -66,7 +68,8 @@
             </p-scrollPanel>
           </div>
           <div class="col-12 md:hidden lg:hidden">
-            <button pButton class="mt-2 w-full p-button-sm p-button-success" label="Add to team" icon="pi pi-plus"></button>
+            <button *ngIf="!hero.inTeam" pButton class="mt-2 w-full p-button-sm p-button-success" label="Add to team" icon="pi pi-plus" (click)="addTeamHero(hero)"></button>
+            <button *ngIf="hero.inTeam" pButton class="p-button-sm p-button-danger p-button-outlined" icon="pi pi-trash" label="Remove" (click)="removeFromTeam(hero)"></button>
           </div>
         </div>
       </ng-container>

@@ -49,23 +49,4 @@ export class HeroesService {
     ].join('/') + '?limit=' + this.configService.apiLimit);
   } 
 
-/*   
-  getStoriesByHeroId(id: string): Observable<IMarvelResponse<IStory>> {
-    return this.requestService.httpGet([
-      this.configService.apiGetCharacters,
-      id,
-      this.configService.apiGetStories,
-    ].join('/'));
-  }
-  
-  getEventsByHeroId(id: string): Observable<IMarvelResponse<IComic>> {
-    return this.requestService.httpGet([
-      this.configService.apiGetCharacters,
-      id,
-      this.configService.apiGetEvents,
-    ].join('/'));
-  }
-  
-  */
-
 }

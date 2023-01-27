@@ -35,7 +35,7 @@
 
     .p-element {
       border-radius: 5px;
-      overflow: hidden;
+      overflow: visible;
       height: calc(100% - 4px)
     }
     .p-element > .p-image > img {

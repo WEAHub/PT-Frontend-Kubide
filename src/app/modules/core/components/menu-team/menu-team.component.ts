@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { getTeam } from 'src/app/modules/team/store/team.selectors';
 
 @Component({
   selector: 'app-menu-team',
@@ -8,7 +10,11 @@ import { Component } from '@angular/core';
 
 export class CoreMenuTeamComponent {
 
-  constructor() {
+  getTeam$ = this.store.select(getTeam)
+
+  constructor(
+    private store: Store
+  ) {
     
   }
 

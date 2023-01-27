@@ -6,6 +6,12 @@ import { State } from '../../store/heroes.reducer';
 import * as heroesActions from '../../store/heroes.actions';
 import { getHeroDetail, getHeroDetailComics, getHeroDetailLoading, getHeroDetailSeries } from '../../store/heroes.selectors';
 
+import * as teamActions from '../../../team/store/team.actions';
+import * as teamSelectors from '../../../team/store/team.selectors';
+import { ICharacter } from '../../models/heroes-api.model';
+import { take } from 'rxjs';
+import { ConfigService } from 'src/app/modules/shared/services/config/config.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-heroes-detail',
@@ -15,10 +21,13 @@ import { getHeroDetail, getHeroDetailComics, getHeroDetailLoading, getHeroDetail
 
 export class HeroesDetailComponent {
 
+  heroId = this.route.snapshot.paramMap.get('id')
+
   getHeroDetail$ = this.store.select(getHeroDetail)
   getHeroDetailLoading$ = this.store.select(getHeroDetailLoading)
   getHeroDetailComics$ = this.store.select(getHeroDetailComics)
   getHeroDetailSeries$ = this.store.select(getHeroDetailSeries)
+
   carrouselResponsive = [
     {
       breakpoint: '1920px',
@@ -48,19 +57,20 @@ export class HeroesDetailComponent {
   ];
 
   constructor(
+    private configService: ConfigService,
     private store: Store<{ heroes: State }>,
     private route: ActivatedRoute,
     private router: Router,
+    private messageService: MessageService,
   )
   { 
     this.loadHero();
   }
 
   loadHero() {
-    const heroId = this.route.snapshot.paramMap.get('id')
 
-    if(heroId) {
-      this.store.dispatch(heroesActions.heroesDetail({ heroId }))
+    if(this.heroId) {
+      this.store.dispatch(heroesActions.heroesDetail({ heroId: this.heroId }))
     }
 
   }
@@ -69,5 +79,49 @@ export class HeroesDetailComponent {
     this.router.navigate(['/heroes'])
   }
 
+  addTeamHero(hero: ICharacter): void {
+    this.store.select(teamSelectors.getTeamCount)
+    .pipe(take(1))
+    .subscribe(count => {
+      const maxTeam = this.configService.appMaxTeam
+      if(count < maxTeam) {
+        this.store.dispatch(teamActions.teamAddHero({ hero }))
+        this.store.dispatch(heroesActions.heroSetTeam({ 
+          id: hero.id.toString(), 
+          changes: {
+            inTeam: true
+          }
+        }))
+        this.saveTeam()
+      }
+      else {
+        this.showMessage('The team can only have 6 heroes.', 'Max. team reached', 'error')
+      }
+    })
+  }
+
+  removeFromTeam(hero: ICharacter): void {
+    this.store.dispatch(teamActions.teamRemoveHero({heroId: hero.id}))
+    this.store.dispatch(heroesActions.heroSetTeam({ 
+      id: hero.id.toString(), 
+      changes: {
+        inTeam: false
+      }
+    }))
+    this.saveTeam()
+  }
+
+  saveTeam(): void {
+    this.store.select(teamSelectors.getTeam)
+    .pipe(take(1))
+    .subscribe(heroes => {
+      this.store.dispatch(teamActions.teamLocalSave({ heroes }))
+    })
+  }
+
+  showMessage(message: string, title: string = 'Loading', severity: string = ''): void {
+    this.messageService.clear('br');
+    this.messageService.add({key: 'br', severity, summary: title, detail: message});
+  }
 
 }

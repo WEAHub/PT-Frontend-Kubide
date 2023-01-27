@@ -75,7 +75,14 @@ const reducer = createReducer(
   on(heroesActions.heroSetTeam, (state, { id, changes }) => {
     return {
       ...state,
-      heroes: heroesAdapter.updateOne({id, changes}, { ...state.heroes})
+      heroes: heroesAdapter.updateOne({id, changes}, { ...state.heroes}),
+      heroDetail: {
+        ...state.heroDetail,
+        hero: {
+          ...state.heroDetail.hero,
+          inTeam: changes.inTeam!
+        }
+      }
     }
   }),
   // SEARCH
@@ -163,12 +170,13 @@ const reducer = createReducer(
 const {
   selectAll: selectHeroesAll,
   selectTotal: selectHeroesTotal,
+  selectEntities: selectHeroesEntities,
 } = heroesAdapter.getSelectors();
 
 const {
   selectAll: selectSearchAll,
   selectTotal: selectSearchTotal,
-} = heroesAdapter.getSelectors();
+} = searchAdapter.getSelectors();
 
 const selectHeroesState = (state: State) => state.heroes;
 const selectSearchState = (state: State) => state.search;
@@ -181,6 +189,7 @@ export {
   selectHeroesAll,
   selectHeroesTotal,
   selectHeroesState,
+  selectHeroesEntities,
   selectSearchAll,
   selectSearchTotal,
   selectSearchState,

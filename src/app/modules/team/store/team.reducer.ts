@@ -27,7 +27,6 @@ const reducer = createReducer(
   })
   ,
   on(teamActions.teamLocalLoadSuccess, (state, { heroes }) => {
-    console.log(heroes);
     return teamAdapter.addMany(heroes, { ...state })
   }),
 )

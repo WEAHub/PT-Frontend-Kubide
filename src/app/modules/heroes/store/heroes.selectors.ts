@@ -1,4 +1,6 @@
+import { Dictionary } from "@ngrx/entity";
 import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { ICharacter } from "../models/heroes-api.model";
 import { SearchState } from "./entities/heroes-search.entity";
 import { HeroesState } from "./entities/heroes.entity";
 
@@ -18,6 +20,16 @@ const getHeroes = createSelector(
   selectHeroState,
   fromHeroes.selectHeroesAll
 )
+/* export const selectHeroesEntities = createSelector(
+  selectHeroState,
+  fromHeroes.selectHeroesEntities
+);
+
+const getHeroEntity = (id: any) => createSelector(
+  selectHeroesEntities,
+  (entities) => entities[id]
+);
+ */
 
 const getHeroesCount = createSelector(
   selectHeroState,
@@ -93,7 +105,7 @@ const getHeroDetailSeries = createSelector(
 
 export {
   getHeroes,
-  
+
   getHeroesLoading,
   getHeroesCount,
   getHeroesTotal,

@@ -9,9 +9,9 @@ import { ICharacter } from '../../models/heroes-api.model';
 
 import * as heroesActions from '../../store/heroes.actions';
 import * as teamActions from '../../../team/store/team.actions';
+import * as teamSelectors from '../../../team/store/team.selectors';
 
 import { State } from '../../store/heroes.reducer';
-import * as teamSelectors from '../../../team/store/team.selectors';
 
 import { getHeroes, getHeroesCount, getHeroesLoading, getHeroesSearch, getHeroesSearchLoading, getHeroesSearchStatus, getHeroesSearchTerm, getHeroesTotal } from '../../store/heroes.selectors';
 
@@ -153,7 +153,6 @@ export class HeroesListComponent implements OnInit, OnDestroy {
     this.store.select(teamSelectors.getTeam)
     .pipe(take(1))
     .subscribe(heroes => {
-      console.log(heroes)
       this.store.dispatch(teamActions.teamLocalSave({ heroes }))
     })
   }
