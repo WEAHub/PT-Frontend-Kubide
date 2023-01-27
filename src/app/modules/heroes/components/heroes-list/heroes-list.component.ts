@@ -131,6 +131,7 @@ export class HeroesListComponent implements OnInit, OnDestroy {
           }
         }))
         this.saveTeam()
+        this.showMessage('Hero added to team successfully!', "Team modified", "success")
       }
       else {
         this.showMessage('The team can only have 6 heroes.', 'Max. team reached', 'error')
@@ -147,6 +148,7 @@ export class HeroesListComponent implements OnInit, OnDestroy {
       }
     }))
     this.saveTeam()
+    this.showMessage('Hero removed!', "Team modified", "warn")
   }
 
   saveTeam(): void {
