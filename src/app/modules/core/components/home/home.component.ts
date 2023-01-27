@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 export class CoreHomeComponent {
 
   constructor() {
-    console.log('home')
+    
   }
 
 }
