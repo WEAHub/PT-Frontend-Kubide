@@ -27,6 +27,14 @@ export class ConfigService {
     )
   }
 
+  get appTitle(): string {
+    return this.appConfig.title;
+  }
+
+  get appMaxTeam(): number {
+    return this.appConfig.maxTeam;
+  }
+
   get apiBaseUrl(): string {
     return this.appConfig.apiBaseUrl;
   }

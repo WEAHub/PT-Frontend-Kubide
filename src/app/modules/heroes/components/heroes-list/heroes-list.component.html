@@ -49,7 +49,8 @@ infiniteScroll
       <ng-template pTemplate="footer">
         <div class="flex justify-content-around mb-3">
           <button pButton class="p-button-sm p-button-outlined" label="Details" icon="pi pi-eye" (click)="goHeroDetails(hero)"></button>
-          <button pButton class="p-button-sm p-button-success" label="Add to team" icon="pi pi-plus"></button>
+          <button *ngIf="!hero.inTeam" pButton class="p-button-sm p-button-success" label="Add to team" icon="pi pi-plus" (click)="addTeamHero(hero)"></button>
+          <button *ngIf="hero.inTeam" pButton class="p-button-sm p-button-danger p-button-outlined" icon="pi pi-trash" label="Remove" (click)="removeFromTeam(hero)"></button>
         </div>
       </ng-template>
     </p-card>

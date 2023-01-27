@@ -24,6 +24,7 @@ interface ICharacter {
   stories: ICollection;
   events: ICollection;
   series: ICollection;
+  inTeam: boolean;
 }
 
 interface IPrice {

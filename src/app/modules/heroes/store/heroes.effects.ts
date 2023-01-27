@@ -1,11 +1,14 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { catchError, exhaust, exhaustMap, forkJoin, map, of, switchMap } from "rxjs";
+import { catchError, exhaust, exhaustMap, forkJoin, map, of, switchMap, take, tap, withLatestFrom } from "rxjs";
 
 import * as heroesActions from "./heroes.actions";
 import { HeroesService } from "../services/heroes.service";
 import { ICharacter, IMarvelResponse, IMarvelResponseData } from "../models/heroes-api.model";
 import { IHTTPErrorResponse } from "../../shared/services/models/http-responses.model";
+import {  Action, Store } from "@ngrx/store";
+import { getTeam } from "../../team/store/team.selectors";
+import { ITeamCharacter } from "../../team/models/team.model";
 
 @Injectable()
 
@@ -13,10 +16,18 @@ export class HeroesEffects {
 	
 	heroesLoad$ = createEffect(() => this.actions$.pipe(
 		ofType(heroesActions.heroesLoad),
-		exhaustMap((params) => this.heroesService.getHeroes(params.offset).pipe(
+		withLatestFrom(
+			this.store.select(getTeam)
+		),
+		exhaustMap(([params, team]: [any, any[]]) => this.heroesService.getHeroes(params.offset).pipe(
 			map((heroes: IMarvelResponse<ICharacter>) => heroesActions.heroesLoadSuccess({
-         heroes: heroes.data.results,
-         total: heroes.data.total
+        heroes: heroes.data.results.map(hero => {
+					return {
+						...hero,
+						inTeam: team.find(teamHero => teamHero.id === hero.id)
+					}
+				}),
+        total: heroes.data.total
       })),
 			catchError((error: IHTTPErrorResponse) => of(heroesActions.heroesLoadFail({ error })))
 		))
@@ -49,6 +60,7 @@ export class HeroesEffects {
 
   constructor(
     private readonly heroesService: HeroesService,
+		private store: Store,
 		private actions$: Actions,
   ) {}
 }

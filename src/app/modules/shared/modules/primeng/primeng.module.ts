@@ -14,6 +14,7 @@ import { TabViewModule } from 'primeng/tabview';
 import { CarouselModule } from 'primeng/carousel';
 import { AvatarModule } from 'primeng/avatar';
 import { TooltipModule } from 'primeng/tooltip';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   exports: [
@@ -29,7 +30,8 @@ import { TooltipModule } from 'primeng/tooltip';
     TabViewModule,
     CarouselModule,
     AvatarModule,
-    TooltipModule
+    TooltipModule,
+    TableModule
   ],
   providers: [
     MessageService

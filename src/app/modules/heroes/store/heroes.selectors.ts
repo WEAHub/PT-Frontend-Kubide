@@ -39,6 +39,7 @@ const getHeroesSearchTerm = createSelector(
   (state: SearchState) => state.term
 )
 
+
 /**
  *  Heroes Search
  *  Path: /heroes

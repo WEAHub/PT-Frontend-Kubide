@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { PrimeNGModule } from "./primeng/primeng.module";
 
+
 @NgModule({
   imports: [
     HttpClientModule,

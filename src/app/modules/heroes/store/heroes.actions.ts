@@ -15,13 +15,14 @@ enum heroesActions {
   DETAIL_HEROES = '[DETAIL] Load hero',
   DETAIL_HEROES_SUCCESS = '[DETAIL] Load hero success',
   DETAIL_HEROES_FAIL = '[DETAIL] Load hero fail',
+
+  SET_HERO_INTEAM = '[HERO] Set in team',
+
 }
 
 const heroesLoad = createAction(
   heroesActions.LOAD_HEROES,
-  props<{
-    offset: number
-  }>()
+  props<{ offset: number }>()
 );
 
 const heroesLoadSuccess = createAction(
@@ -72,6 +73,12 @@ const heroesDetailFail = createAction(
   props<{error: IHTTPErrorResponse}>()
 )
 
+
+const heroSetTeam = createAction(
+  heroesActions.SET_HERO_INTEAM,
+  props<{ id: string, changes: Partial<ICharacter>}>()
+)
+
 export {
   heroesActions,
   heroesLoad,
@@ -85,5 +92,8 @@ export {
 
   heroesDetail,
   heroesDetailSuccess,
-  heroesDetailFail
+  heroesDetailFail,
+
+  heroSetTeam,
+
 }

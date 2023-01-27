@@ -27,8 +27,8 @@ import { HeroesDetailComicComponent } from './components/heroes-detail-comic/her
     HeroesService,
   ],
   imports: [
-    HeroesRoutingModule,
     SharedModules,
+    HeroesRoutingModule,
     StoreModule.forFeature(fromHeroes.featureName, fromHeroes.reducer),
     EffectsModule.forFeature([HeroesEffects])
   ]

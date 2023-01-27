@@ -1,4 +1,6 @@
 {
+  "title": "Marvel Heroes Manager (Kubide PT)",
+  "maxTeam": 6,
   "apiKey": "cad4679aaa89de7cbca2fef217a73f9e", 
   "apiBaseUrl": "https://gateway.marvel.com:443/v1/public/",
   "apiLimit": 20,
@@ -9,5 +11,5 @@
     "events": "events",
     "stories": "stories",
     "series": "series"
-  }  
+  }
 }

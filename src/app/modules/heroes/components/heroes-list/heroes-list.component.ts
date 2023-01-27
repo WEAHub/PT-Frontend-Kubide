@@ -3,12 +3,16 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { MessageService } from 'primeng/api';
 
-import { skip, Subscription, take } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { ConfigService } from 'src/app/modules/shared/services/config/config.service';
 import { ICharacter } from '../../models/heroes-api.model';
 
 import * as heroesActions from '../../store/heroes.actions';
+import * as teamActions from '../../../team/store/team.actions';
+
 import { State } from '../../store/heroes.reducer';
+import * as teamSelectors from '../../../team/store/team.selectors';
+
 import { getHeroes, getHeroesCount, getHeroesLoading, getHeroesSearch, getHeroesSearchLoading, getHeroesSearchStatus, getHeroesSearchTerm, getHeroesTotal } from '../../store/heroes.selectors';
 
 
@@ -38,16 +42,17 @@ export class HeroesListComponent implements OnInit, OnDestroy {
 
   getHeroesSub: Subscription = this.getHeroes$
   .subscribe((heroes: ICharacter[]) => {
+
     if(!heroes.length) return
+
     if(!this.totalHeroes) {
       this.store.select(getHeroesTotal)
       .pipe(take(1))
       .subscribe(total => this.totalHeroes = total)
     }
+
     this.virtualHeroes = heroes
 
-    const message = `${this.virtualHeroes.length} of ${this.totalHeroes} Heroes`
-    this.showMessage(message)
   })
 
   getHeroesSearch: Subscription = this.getHeroesSearch$
@@ -97,16 +102,59 @@ export class HeroesListComponent implements OnInit, OnDestroy {
     .subscribe(count => {
       if(this.totalHeroes > count) {
         this.store.dispatch(heroesActions.heroesLoad({ offset: count }))
+        const message = `${count + this.configService.apiLimit} of ${this.totalHeroes} Heroes`
+        this.showMessage(message)
       }
     })
   }
 
-  goHeroDetails(hero: ICharacter) {
+  goHeroDetails(hero: ICharacter): void {
     this.router.navigate(['/heroes/' + hero.id])
   }
   
-  showMessage(message: string): void {
+  showMessage(message: string, title: string = 'Loading', severity: string = ''): void {
     this.messageService.clear('br');
-    this.messageService.add({key: 'br', severity:'', summary: 'Loaded', detail: message});
+    this.messageService.add({key: 'br', severity, summary: title, detail: message});
+  }
+
+  addTeamHero(hero: ICharacter): void {
+    this.store.select(teamSelectors.getTeamCount)
+    .pipe(take(1))
+    .subscribe(count => {
+      const maxTeam = this.configService.appMaxTeam
+      if(count < maxTeam) {
+        this.store.dispatch(teamActions.teamAddHero({ hero }))
+        this.store.dispatch(heroesActions.heroSetTeam({ 
+          id: hero.id.toString(), 
+          changes: {
+            inTeam: true
+          }
+        }))
+        this.saveTeam()
+      }
+      else {
+        this.showMessage('The team can only have 6 heroes.', 'Max. team reached', 'error')
+      }
+    })
+  }
+
+  removeFromTeam(hero: ICharacter): void {
+    this.store.dispatch(teamActions.teamRemoveHero({heroId: hero.id}))
+    this.store.dispatch(heroesActions.heroSetTeam({ 
+      id: hero.id.toString(), 
+      changes: {
+        inTeam: false
+      }
+    }))
+    this.saveTeam()
+  }
+
+  saveTeam(): void {
+    this.store.select(teamSelectors.getTeam)
+    .pipe(take(1))
+    .subscribe(heroes => {
+      console.log(heroes)
+      this.store.dispatch(teamActions.teamLocalSave({ heroes }))
+    })
   }
 }

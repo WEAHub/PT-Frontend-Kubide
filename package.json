@@ -22,6 +22,7 @@
     "@ngrx/entity": "^15.1.0",
     "@ngrx/store": "^15.1.0",
     "@ngrx/store-devtools": "^15.1.0",
+    "ngrx-store-localstorage": "^15.0.0",
     "ngx-infinite-scroll": "^15.0.0",
     "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",

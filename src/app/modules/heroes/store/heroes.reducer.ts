@@ -72,6 +72,12 @@ const reducer = createReducer(
       error: error.message,
     }
   }),
+  on(heroesActions.heroSetTeam, (state, { id, changes }) => {
+    return {
+      ...state,
+      heroes: heroesAdapter.updateOne({id, changes}, { ...state.heroes})
+    }
+  }),
   // SEARCH
   on(heroesActions.heroesSearch, (state, { term }) => {
     return {
@@ -170,6 +176,7 @@ const selectSearchState = (state: State) => state.search;
 export {
   featureName,
   State,
+  initialState,
   reducer,
   selectHeroesAll,
   selectHeroesTotal,
