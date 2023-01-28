@@ -12,16 +12,12 @@ import { CoreHomeComponent } from './modules/core/components/home/home.component
 import { Modules } from './modules'
 import { environment } from '../environments/environment';
 import { ApiKeyInterceptor } from './modules/shared/services/http/interceptors/api-key.interceptor';
-import { CoreMenuTeamComponent } from './modules/core/components/menu-team/menu-team.component';
-import { CoreMenuSearchComponent } from './modules/core/components/menu-search/menu-search.component';
 
 @NgModule({
   declarations: [
     CoreComponent,
     CoreMenuComponent,
     CoreHomeComponent,
-    CoreMenuTeamComponent,
-    CoreMenuSearchComponent
   ],
   imports: [
     Modules,

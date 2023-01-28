@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import * as heroesActions from '../../../heroes/store/heroes.actions';
 import { getHeroesSearchLoading, getHeroesSearchTerm } from '../../../heroes/store/heroes.selectors';
 import { debounce, interval, map, Observable, Subject, Subscription } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-search',

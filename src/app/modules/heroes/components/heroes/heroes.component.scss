@@ -1,0 +1,8 @@
+.menu-team {
+  display: none !important;
+}
+@media (max-width: 823px) {
+  .menu-team {
+    display: flex !important;
+  }
+}

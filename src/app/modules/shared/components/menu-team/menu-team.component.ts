@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ICharacter } from 'src/app/modules/heroes/models/heroes-api.model';
@@ -12,6 +12,7 @@ import { getTeam } from 'src/app/modules/team/store/team.selectors';
 
 export class CoreMenuTeamComponent {
 
+  @Input() mobile: boolean = false 
   getTeam$ = this.store.select(getTeam)
 
   constructor(
