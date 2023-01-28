@@ -1,7 +1,13 @@
 <p-toast styleClass="toast-message" position="bottom-right" key="br" life="500"></p-toast>
 
 <div class="flex flex-column align-items-center gap-3 fadein">
-  <p-card styleClass="p-card-shadow" class="sm:mobile hero-team-card w-full">
+
+  <p-card styleClass="p-card-shadow" class="hero-team-card w-full">
+    <ng-template pTemplate="content">
+    </ng-template>
+  </p-card>
+  
+  <p-card styleClass="p-card-shadow" class="hero-team-card w-full">
     <ng-template pTemplate="content">
         <p-table 
         responsiveLayout="stack" 
@@ -34,8 +40,8 @@
                 </div>
               </td>
               <td>
-                <div class="flex flex-column">
-                  <div class="hero-name"><span>{{hero.name}}</span></div>
+                <div class="flex flex-column w-full">
+                  <div class="hero-name text-center md:text-left lg:text-left"><span>{{hero.name}}</span></div>
                   <div class="hero-description">
                     <p-scrollPanel styleClass="hero-desc-text">
                       {{ 
