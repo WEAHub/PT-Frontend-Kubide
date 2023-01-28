@@ -32,8 +32,8 @@ export class HeroesDetailComponent implements OnDestroy {
     { breakpoint: '1920px', numVisible: 4, numScroll: 2 },
     { breakpoint: '1280px', numVisible: 4, numScroll: 2 },
     { breakpoint: '1024px', numVisible: 3, numScroll: 2 },
-    { breakpoint: '768px', numVisible: 2, numScroll: 2.5 },
-    { breakpoint: '560px', numVisible: 1, numScroll: 3 }
+    { breakpoint: '768px', numVisible: 2, numScroll: 2 },
+    { breakpoint: '560px', numVisible: 1, numScroll: 2 },
   ];
 
   paramSub: Subscription = this.route.params.subscribe(params => {
