@@ -1,5 +1,5 @@
 <div class="flex flex-row flex-wrap gap-3">
   <ng-template ngFor let-hero [ngForOf]="(getTeam$ | async)!">
-    <p-avatar size="large" shape="circle" [image]="hero.thumbnail.path + '.' + hero.thumbnail.extension"></p-avatar>
+    <p-avatar size="large" size="xlarge" shape="circle" [image]="hero.thumbnail.path + '.' + hero.thumbnail.extension"></p-avatar>
   </ng-template>
 </div>

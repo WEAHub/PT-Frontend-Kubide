@@ -18,6 +18,8 @@ import { TooltipModule } from 'primeng/tooltip';
 import { TableModule } from 'primeng/table';
 import { InplaceModule } from 'primeng/inplace';
 import { DialogModule } from 'primeng/dialog';
+import { ScrollTopModule } from 'primeng/scrolltop';
+
 @NgModule({
   exports: [
     SkeletonModule,
@@ -37,6 +39,7 @@ import { DialogModule } from 'primeng/dialog';
     DialogModule,
     InputTextareaModule,
     InputTextModule,
+    ScrollTopModule,
   ],
   providers: [
     MessageService
