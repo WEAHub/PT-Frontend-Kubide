@@ -12,13 +12,12 @@ export class StorageService {
 
   constructor() { }
 
-  saveTeam(heroes: ITeamCharacter[], title:  string, description: string): Observable<any> {
+  saveTeam(heroes: ITeamCharacter[], name:  string, description: string): Observable<any> {
     const teamJson = JSON.stringify({
       heroes, 
-      title, 
+      name, 
       description
     })
-
     localStorage.setItem(this.teamKey, teamJson)
     return of()
   }
