@@ -4,9 +4,18 @@
 
   <p-card styleClass="p-card-shadow" class="hero-team-card w-full">
     <ng-template pTemplate="content">
+
+      <div class="flex flex-column">
+        <span class="team-name">{{ getTeamName$ | async }}</span>
+        <p-divider align="center">
+          <p-button label="Edit" icon="pi pi-search" styleClass="p-button-outlined" (click)="modifyTeam()"></p-button>
+        </p-divider>
+        <span class="team-description">{{ getTeamDescription$ | async }}</span>
+      </div>
+
     </ng-template>
   </p-card>
-  
+
   <p-card styleClass="p-card-shadow" class="hero-team-card w-full">
     <ng-template pTemplate="content">
         <p-table 
@@ -41,7 +50,7 @@
               </td>
               <td>
                 <div class="flex flex-column w-full">
-                  <div class="hero-name text-center md:text-left lg:text-left"><span>{{hero.name}}</span></div>
+                  <div class="hero-name text-center sm:text-center md:text-center lg:text-left"><span>{{hero.name}}</span></div>
                   <div class="hero-description">
                     <p-scrollPanel styleClass="hero-desc-text">
                       {{ 
@@ -76,6 +85,11 @@
               </td>
             </tr>
           </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <div class="w-full p-5">
+              <span>No heroes</span>
+            </div>
+          </ng-template>
         </p-table>
     </ng-template>
   </p-card>
@@ -85,5 +99,11 @@
 <app-modify-hero 
 [display]="modifyHeroDialogOpts.visible"
 [hero]="modifyHeroDialogOpts.hero"
-(displayChange)="onDialogClose($event)"
+(displayChange)="onModifyHeroDialogClose($event)"
 ></app-modify-hero>
+
+<app-modify-team 
+[display]="modifyTeamDialogOpts.visible"
+[team]="modifyTeamDialogOpts.data"
+(displayChange)="onModifyTeamDialogClose($event)"
+></app-modify-team>

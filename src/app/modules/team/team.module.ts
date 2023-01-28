@@ -8,15 +8,16 @@ import { TeamListComponent } from './components/team-list/team-list.component';
 import * as fromTeam from './store/team.reducer'
 import { TeamService } from './services/team.service';
 import { SharedModules } from '../shared';
-import { ITeamCharacter } from './models/team.model';
 import { TeamEffects } from './store/team.effects';
 import { StorageService } from './services/storage.service';
 import { ModifyHeroComponent } from './components/modify-hero/modify-hero.component';
+import { ModifyTeamComponent } from './components/modify-team/modify-team.component';
 
 @NgModule({
   declarations: [
     TeamListComponent,
-    ModifyHeroComponent
+    ModifyHeroComponent,
+    ModifyTeamComponent
   ],
   providers: [
     TeamService,

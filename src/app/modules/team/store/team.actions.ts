@@ -7,6 +7,7 @@ enum teamActions {
   ADD_TEAM_HERO = '[TEAM] Add hero',
   REMOVE_TEAM_HERO = '[TEAM] Remove hero',
   MODIFY_TEAM_HERO = '[TEAM] Modify hero',
+  MODIFY_TEAM_DETAILS = '[TEAM] Modify team details',
 
   SAVE_TEAM = '[TEAM] Saving team in local storage',
   LOAD_TEAM = '[TEAM] Loading team from local storage',
@@ -48,6 +49,10 @@ const teamLocalLoadNoHeroes = createAction(
   teamActions.LOAD_TEAM_SUCCESS_NO_HEROES,
 )
 
+const teamModifyTeam = createAction(
+  teamActions.MODIFY_TEAM_DETAILS,
+  props<{name: string, description: string }>()
+)
 
 export {
   teamAddHero,
@@ -56,5 +61,6 @@ export {
   teamLocalSave,
   teamLocalLoad,
   teamLocalLoadSuccess,
-  teamLocalLoadNoHeroes
+  teamLocalLoadNoHeroes,
+  teamModifyTeam,
 }

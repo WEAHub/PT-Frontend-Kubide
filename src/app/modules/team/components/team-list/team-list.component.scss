@@ -10,7 +10,6 @@
     line-height: 1rem;
   }
 
-
   .hero-table {
 
     .hero-image {
@@ -56,4 +55,16 @@
 
 .hero-team-card {
   max-width: 1200px;
+}
+
+.team-name {
+  font-family: "Marvel";
+  font-size: 6em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.team-description {
+  font-size: 1.5em;
+  padding: 10px;
 }

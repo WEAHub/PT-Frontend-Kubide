@@ -37,6 +37,13 @@ const reducer = createReducer(
   }),
   on(teamActions.teamModifyHero, (state, { id, changes }) => {
     return teamAdapter.updateOne({id, changes}, { ...state })
+  }),
+  on(teamActions.teamModifyTeam, (state, {name, description}) => {
+    return {
+      ...state,
+      name,
+      description,
+    }
   })
 )
 

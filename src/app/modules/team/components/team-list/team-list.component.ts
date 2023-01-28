@@ -1,17 +1,15 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+import { ICharacter } from 'src/app/modules/heroes/models/heroes-api.model';
+import { ITeamCharacter } from '../../models/team.model';
 import { TeamState } from '../../store/entities/team.entity';
-import { getTeam } from '../../store/team.selectors';
-
 import * as heroesActions from '../../../heroes/store/heroes.actions';
 import * as teamActions from '../../store/team.actions';
 import * as teamSelectors from '../../store/team.selectors';
-import { MessageService } from 'primeng/api';
-import { ICharacter } from 'src/app/modules/heroes/models/heroes-api.model';
-import { take } from 'rxjs';
-import { ITeamCharacter } from '../../models/team.model';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { combineLatest, forkJoin, take } from 'rxjs';
 
 @Component({
   selector: 'app-team-list',
@@ -21,15 +19,26 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
 export class TeamListComponent {
 
-  getTeam$ = this.store.select(getTeam)
+  getTeam$ = this.store.select(teamSelectors.getTeam)
+  getTeamName$ = this.store.select(teamSelectors.getTeamName)
+  getTeamDescription$ = this.store.select(teamSelectors.getTeamDescription)
 
   modifyHeroDialogOpts = {
     hero: <ITeamCharacter>{},
     visible: false,
   }
 
+  modifyTeamDialogOpts = {
+    data: {
+      name: '',
+      description: '',
+    },
+    visible: false,
+  }
+
   teamForm: FormGroup = this.fb.group({
-    teamName: []
+    name: ['', [Validators.required]],
+    description: ['', [Validators.required]]
   })
 
   constructor(
@@ -62,13 +71,38 @@ export class TeamListComponent {
     this.messageService.add({key: 'br', severity, summary: title, detail: message});
   }
 
-  modifyHero(hero: ITeamCharacter) {
+  modifyHero(hero: ITeamCharacter): void {
     this.modifyHeroDialogOpts.hero = hero;
     this.modifyHeroDialogOpts.visible = true;
   }
   
-  onDialogClose(event: boolean) {
+  modifyTeam(): void {
+    combineLatest(
+      this.store.select(teamSelectors.getTeamName),
+      this.store.select(teamSelectors.getTeamDescription)
+    )
+    .pipe(take(1))
+    .subscribe(([name, description]) => {
+      
+      this.modifyTeamDialogOpts = {
+        visible: true,
+        data: {
+          name, 
+          description
+        }
+      }
+
+    })
+  
+  }
+
+  onModifyHeroDialogClose(event: boolean) {
     this.modifyHeroDialogOpts.visible = event;
+    this.saveTeam();
+  }
+
+  onModifyTeamDialogClose(event: boolean) {
+    this.modifyTeamDialogOpts.visible = event;
     this.saveTeam();
   }
 

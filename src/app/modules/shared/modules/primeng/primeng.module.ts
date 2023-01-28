@@ -19,6 +19,7 @@ import { TableModule } from 'primeng/table';
 import { InplaceModule } from 'primeng/inplace';
 import { DialogModule } from 'primeng/dialog';
 import { ScrollTopModule } from 'primeng/scrolltop';
+import { DividerModule } from 'primeng/divider';
 
 @NgModule({
   exports: [
@@ -40,6 +41,7 @@ import { ScrollTopModule } from 'primeng/scrolltop';
     InputTextareaModule,
     InputTextModule,
     ScrollTopModule,
+    DividerModule
   ],
   providers: [
     MessageService

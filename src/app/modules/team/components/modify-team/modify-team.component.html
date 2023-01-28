@@ -4,11 +4,11 @@
 (onShow)="onShow()"
 [modal]="true">
   <ng-template pTemplate="header">
-    <span>Modify hero</span>
+    <span>Modify team</span>
   </ng-template>
   
   <ng-template pTemplate="content">
-      <form [formGroup]="heroForm" class="m-4">
+      <form [formGroup]="teamForm" class="m-4">
 
         <div class="field">
           <span class="p-float-label">
@@ -17,7 +17,7 @@
             type="text" 
             formControlName="name"
             pInputText> 
-            <label for="name">Hero name</label>
+            <label for="name">Team name</label>
           </span>
         </div>
 
@@ -38,6 +38,6 @@
   </ng-template>
 
   <ng-template pTemplate="footer">
-    <button pButton class="p-button-sm" label="Save" (click)="modifyHero()"></button>
+    <button pButton class="p-button-sm" label="Save" (click)="modifyTeam()"></button>
   </ng-template>
 </p-dialog>
