@@ -23,7 +23,19 @@ const getTeamCount = createSelector(
   fromTeam.selectTeamTotal
 )
 
+const getTeamName = createSelector(
+  teamState,
+  (state: TeamState) => state.name
+)
+
+const getTeamDescription = createSelector(
+  teamState,
+  (state: TeamState) => state.description
+)
+
 export {
   getTeam,
-  getTeamCount
+  getTeamCount,
+  getTeamName,
+  getTeamDescription
 }

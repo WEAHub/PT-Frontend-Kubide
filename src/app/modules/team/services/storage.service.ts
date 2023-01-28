@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { RequestService } from '../../shared/services/http/http-request.service';
 import { ITeamCharacter } from '../models/team.model';
 
@@ -12,15 +12,27 @@ export class StorageService {
 
   constructor() { }
 
-  saveTeam(heroes: ITeamCharacter[]): Observable<any> {
-    const teamJson = JSON.stringify(heroes)
+  saveTeam(heroes: ITeamCharacter[], title:  string, description: string): Observable<any> {
+    const teamJson = JSON.stringify({
+      heroes, 
+      title, 
+      description
+    })
+
     localStorage.setItem(this.teamKey, teamJson)
     return of()
   }
 
-  loadTeam(): Observable<ITeamCharacter[]> {
-    const team = JSON.parse(localStorage.getItem(this.teamKey)!) as ITeamCharacter[];
-    return of(team)
+  loadTeam(): Observable<any> {
+    const localTeam = localStorage.getItem(this.teamKey)!
+
+    if(localTeam === null) {
+      return throwError(() => new Error())
+    }
+
+    const serializedTeam = JSON.parse(localTeam)
+
+    return of(serializedTeam)
   }
   
 }

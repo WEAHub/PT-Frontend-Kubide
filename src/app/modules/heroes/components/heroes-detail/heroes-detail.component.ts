@@ -101,11 +101,7 @@ export class HeroesDetailComponent implements OnDestroy {
   }
 
   saveTeam(): void {
-    this.store.select(teamSelectors.getTeam)
-    .pipe(take(1))
-    .subscribe(heroes => {
-      this.store.dispatch(teamActions.teamLocalSave({ heroes }))
-    })
+    this.store.dispatch(teamActions.teamLocalSave())
   }
 
   showMessage(message: string, title: string = 'Loading', severity: string = ''): void {

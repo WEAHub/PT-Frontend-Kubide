@@ -55,10 +55,10 @@
               [src]="hero.thumbnail.path + '.' + hero.thumbnail.extension" />
             </div>
             <button *ngIf="!hero.inTeam" pButton class="mt-2 w-full p-button-sm p-button-success hidden md:block lg:block" label="Add to team" icon="pi pi-plus" (click)="addTeamHero(hero)"></button>
-            <button *ngIf="hero.inTeam" pButton class=" mt-2 w-full p-button-sm p-button-danger p-button-outlined hidden md:block lg:block" icon="pi pi-trash" label="Remove" (click)="removeFromTeam(hero)"></button>
+            <button *ngIf="hero.inTeam" pButton class="mt-2 w-full p-button-sm p-button-danger hidden md:block lg:block p-button-outlined" label="Remove" icon="pi pi-trash" (click)="removeFromTeam(hero)"></button>
           </div>
           <div class="lg:col-8 md:col-8 sm:col-12 hero-info">
-            <div class="hero-name text-center md:text-left lg:text-left mt-2 md:mt-0 lg:md-0">{{ hero.name }}</div>
+            <div class="hero-name text-center md:text-left lg:text-left mt-2 md:mt-0 lg:mt-0">{{ hero.name }}</div>
             <p-scrollPanel [style]="{width: '100%', 'max-height': '320px'}">
               <p>
                 {{ 
@@ -71,7 +71,7 @@
           </div>
           <div class="col-12 md:hidden lg:hidden">
             <button *ngIf="!hero.inTeam" pButton class="mt-2 w-full p-button-sm p-button-success" label="Add to team" icon="pi pi-plus" (click)="addTeamHero(hero)"></button>
-            <button *ngIf="hero.inTeam" pButton class="p-button-sm p-button-danger p-button-outlined" icon="pi pi-trash" label="Remove" (click)="removeFromTeam(hero)"></button>
+            <button *ngIf="hero.inTeam" pButton class="mt-2 w-full p-button-sm p-button-danger p-button-outlined" icon="pi pi-trash" label="Remove" (click)="removeFromTeam(hero)"></button>
           </div>
         </div>
       </ng-container>

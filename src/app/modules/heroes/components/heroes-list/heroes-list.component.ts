@@ -152,10 +152,6 @@ export class HeroesListComponent implements OnInit, OnDestroy {
   }
 
   saveTeam(): void {
-    this.store.select(teamSelectors.getTeam)
-    .pipe(take(1))
-    .subscribe(heroes => {
-      this.store.dispatch(teamActions.teamLocalSave({ heroes }))
-    })
+    this.store.dispatch(teamActions.teamLocalSave())
   }
 }

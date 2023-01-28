@@ -6,6 +6,8 @@ const teamAdapter: EntityAdapter<ITeamCharacter> = createEntityAdapter<ITeamChar
 interface TeamState extends EntityState<ITeamCharacter> {
   loading: boolean,
   error: string,
+  name: string,
+  description: string,
 }
 
 export {

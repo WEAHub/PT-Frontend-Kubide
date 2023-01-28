@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { catchError, exhaust, exhaustMap, forkJoin, map, of, switchMap, tap } from "rxjs";
+import { Store } from "@ngrx/store";
+import { catchError, exhaustMap, map, of, switchMap, tap, withLatestFrom } from "rxjs";
 
-import { IHTTPErrorResponse } from "../../shared/services/models/http-responses.model";
-import { ITeamCharacter } from "../models/team.model";
 import { StorageService } from "../services/storage.service";
-import { TeamService } from "../services/team.service";
 import * as teamActions from './team.actions';
+import { TeamState } from "./team.reducer";
+import * as teamSelectors from './team.selectors'
 
 @Injectable()
 
@@ -14,20 +14,29 @@ export class TeamEffects {
 
   constructor(
 		private actions$: Actions,
+    private store: Store<{team: TeamState}>,
     private storageService: StorageService
   ) { }
 
   saveTeam$ = createEffect(() => this.actions$.pipe(
 		ofType(teamActions.teamLocalSave),
-		tap(payload => {
-      this.storageService.saveTeam(payload.heroes)
-		})
+		withLatestFrom(
+			this.store.select(teamSelectors.getTeam),
+			this.store.select(teamSelectors.getTeamName),
+			this.store.select(teamSelectors.getTeamDescription),
+		),
+		switchMap(([action, heroes, name, description]) =>
+      this.storageService.saveTeam(heroes, name, description).pipe(
+        tap(() => of(teamActions.teamLocalLoadSuccess({ name, description, heroes })))
+      )
+    )
 	), { dispatch: false });
 
   loadTeam$ = createEffect(() => this.actions$.pipe(
 		ofType(teamActions.teamLocalLoad),
     exhaustMap(() => this.storageService.loadTeam().pipe(
-      map(heroes => teamActions.teamLocalLoadSuccess({heroes}))
+      map(localTeam => teamActions.teamLocalLoadSuccess(localTeam)),
+			catchError(() => of(teamActions.teamLocalLoadNoHeroes()))
     ))
   ))
 

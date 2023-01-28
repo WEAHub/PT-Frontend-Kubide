@@ -11,6 +11,7 @@ import { ICharacter } from 'src/app/modules/heroes/models/heroes-api.model';
 import { take } from 'rxjs';
 import { ITeamCharacter } from '../../models/team.model';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-team-list',
@@ -27,10 +28,15 @@ export class TeamListComponent {
     visible: false,
   }
 
+  teamForm: FormGroup = this.fb.group({
+    teamName: []
+  })
+
   constructor(
     private store: Store<{ heroes: TeamState }>,
     private messageService: MessageService,
     private router: Router,
+    private fb: FormBuilder
   ) {
 
   }
@@ -48,11 +54,7 @@ export class TeamListComponent {
   }
 
   saveTeam(): void {
-    this.store.select(teamSelectors.getTeam)
-    .pipe(take(1))
-    .subscribe(heroes => {
-      this.store.dispatch(teamActions.teamLocalSave({ heroes }))
-    })
+    this.store.dispatch(teamActions.teamLocalSave())
   }
 
   showMessage(message: string, title: string = 'Loading', severity: string = ''): void {

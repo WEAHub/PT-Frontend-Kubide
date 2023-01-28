@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { RequestService } from '../../shared/services/http/http-request.service';
 
 @Injectable({
@@ -6,7 +7,7 @@ import { RequestService } from '../../shared/services/http/http-request.service'
 })
 export class TeamService {
   constructor(
-    private readonly requestService: RequestService
+    private readonly requestService: RequestService,
   ) { }
-
+  
 }

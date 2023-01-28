@@ -8,6 +8,8 @@ const featureName = "teamStore";
 const initialState: TeamState = teamAdapter.getInitialState({
   loading: false,
   error: '',
+  name: 'Kubide Team',
+  description: 'The Avengers are a team of Marvel superheroes fighting against crime and injustice using their unique abilities and advanced technology to protect Earth from extraterrestrial and national threats.',
 });
 
 const reducer = createReducer(
@@ -26,8 +28,12 @@ const reducer = createReducer(
     return teamAdapter.removeOne(heroId, { ...state })
   })
   ,
-  on(teamActions.teamLocalLoadSuccess, (state, { heroes }) => {
-    return teamAdapter.addMany(heroes, { ...state })
+  on(teamActions.teamLocalLoadSuccess, (state, { name, description, heroes }) => {
+    return teamAdapter.addMany(heroes, { 
+      ...state,
+      name,
+      description
+    })
   }),
   on(teamActions.teamModifyHero, (state, { id, changes }) => {
     return teamAdapter.updateOne({id, changes}, { ...state })
