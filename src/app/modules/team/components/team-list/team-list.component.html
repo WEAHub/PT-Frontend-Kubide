@@ -1,6 +1,6 @@
 <p-toast styleClass="toast-message" position="bottom-right" key="br" life="500"></p-toast>
 
-<div class="flex flex-column align-items-center gap-3">
+<div class="flex flex-column align-items-center gap-3 fadein">
   <p-card styleClass="p-card-shadow" class="sm:mobile hero-team-card w-full">
     <ng-template pTemplate="content">
         <p-table 
@@ -23,7 +23,7 @@
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-hero>
-            <tr>
+            <tr class="fadein animation-duration-300">
               <td class="justify-content-center">
                 <div class="hero-image">
                   <p-image

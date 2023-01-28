@@ -1,6 +1,6 @@
 <p-toast styleClass="toast-message" position="bottom-right" key="br" life="500"></p-toast>
 
-<div *ngIf="(getHeroDetailLoading$ | async)" class="flex flex-column align-items-center gap-3">
+<div *ngIf="(getHeroDetailLoading$ | async)" class="zoomin animation-duration-100 flex flex-column align-items-center gap-3">
   <p-card styleClass="p-card-shadow" class="sm:mobile hero-detail-card w-full">
     <ng-template pTemplate="content">
       <div class="grid hero-detail-container">
@@ -41,7 +41,7 @@
   </p-card>
 </div>
 
-<div *ngIf="!(getHeroDetailLoading$ | async)" class="flex flex-column align-items-center gap-3">
+<div *ngIf="!(getHeroDetailLoading$ | async)" class="fadein animation-duration-150 flex flex-column align-items-center gap-3">
   <p-card styleClass="p-card-shadow" class="sm:mobile hero-detail-card w-full">
     <ng-template pTemplate="content">
       <ng-container *ngIf="getHeroDetail$ | async as hero">

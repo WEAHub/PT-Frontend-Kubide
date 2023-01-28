@@ -21,7 +21,7 @@ infiniteScroll
 
   <!-- Heroes cards -->
   <ng-template ngFor let-hero [ngForOf]="(getHeroesSearchStatus$ | async) ? this.filteredHeroes : this.virtualHeroes">    
-    <p-card styleClass="p-card-shadow" class="hero-card">
+    <p-card styleClass="p-card-shadow" class="hero-card animation-duration-250" [ngClass]="hero.inTeam ? 'flipup' : 'fadein'">
       <ng-template pTemplate="content">
 
         <div class="hero-container align-items-center">
@@ -61,7 +61,7 @@ infiniteScroll
 
   <!-- Heroes cards loading -->
   <ng-template ngFor let-skeleton [ngForOf]="skeletonList">
-    <p-card *ngIf="(getHeroesLoading$ | async) || (searchLoading$ | async)" styleClass="p-card-shadow">
+    <p-card *ngIf="(getHeroesLoading$ | async) || (searchLoading$ | async)" styleClass="zoomin  animation-duration-150 p-card-shadow ">
       <ng-template pTemplate="content">
         <div class="hero-container">
           <div class="flex mb-3 justify-content-center">
