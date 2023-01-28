@@ -7,19 +7,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreRoutingModule } from './modules/core/core-routing.module';
 import { CoreComponent } from './modules/core/core.component';
-import { CoreMenuComponent } from './modules/core/components/menubar/menu.component';
+import { CoreMenuComponent } from './modules/core/components/menu/menu.component';
 import { CoreHomeComponent } from './modules/core/components/home/home.component';
 import { Modules } from './modules'
 import { environment } from '../environments/environment';
 import { ApiKeyInterceptor } from './modules/shared/services/http/interceptors/api-key.interceptor';
 import { CoreMenuTeamComponent } from './modules/core/components/menu-team/menu-team.component';
+import { CoreMenuSearchComponent } from './modules/core/components/menu-search/menu-search.component';
 
 @NgModule({
   declarations: [
     CoreComponent,
     CoreMenuComponent,
     CoreHomeComponent,
-    CoreMenuTeamComponent
+    CoreMenuTeamComponent,
+    CoreMenuSearchComponent
   ],
   imports: [
     Modules,

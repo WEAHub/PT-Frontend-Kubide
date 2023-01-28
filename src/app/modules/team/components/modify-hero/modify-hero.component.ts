@@ -48,7 +48,8 @@ export class ModifyHeroComponent {
         id: this.hero.id,
         changes: {
           name: this.heroForm.get('name')?.value,
-          description: this.heroForm.get('description')?.value
+          description: this.heroForm.get('description')?.value,
+          modifiedDt: new Date()
         }
       }
 

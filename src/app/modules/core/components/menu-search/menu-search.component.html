@@ -1,0 +1,14 @@
+<form [formGroup]="searchForm">
+  <span class="p-input-icon-left p-float-label">
+    <i [ngClass]="(searchLoading$ | async) ? 'pi pi-spin pi-spinner' : 'pi pi-search'"></i>
+    <input 
+    pInputText 
+    formControlName="searchTerm"
+    placeholder="Search" 
+    type="text" 
+    class="p-inputtext-sm w-15rem" 
+    (keyup)="onSearchChange()"
+    />
+    <label for="float-input">Search by hero</label>
+  </span>
+</form>

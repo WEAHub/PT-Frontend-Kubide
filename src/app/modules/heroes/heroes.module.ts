@@ -6,7 +6,6 @@ import * as fromHeroes from './store/heroes.reducer';
 
 import { HeroesComponent } from './components/heroes/heroes.component'
 import { HeroesListComponent } from './components/heroes-list/heroes-list.component';
-import { HeroesSearchComponent } from './components/heroes-search/heroes-search.component';
 import { HeroesDetailComponent } from './components/heroes-detail/heroes-detail.component';
 
 import { HeroesService } from './services/heroes.service';
@@ -19,7 +18,6 @@ import { HeroesDetailComicComponent } from './components/heroes-detail-comic/her
   declarations: [
     HeroesComponent,
     HeroesListComponent,
-    HeroesSearchComponent,
     HeroesDetailComponent,
     HeroesDetailComicComponent
   ],

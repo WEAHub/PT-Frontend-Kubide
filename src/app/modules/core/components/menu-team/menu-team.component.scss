@@ -1,0 +1,9 @@
+
+
+::ng-deep {
+  .hero-avatar {
+    &:hover {
+      outline: 2px solid rgb(117, 188, 255);
+    }
+  }
+}

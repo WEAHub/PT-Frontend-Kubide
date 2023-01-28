@@ -1,18 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { State } from '../../store/heroes.reducer';
-import * as heroesActions from '../../store/heroes.actions';
-import { getHeroesSearchLoading, getHeroesSearchTerm } from '../../store/heroes.selectors';
+import * as heroesActions from '../../../heroes/store/heroes.actions';
+import { getHeroesSearchLoading, getHeroesSearchTerm } from '../../../heroes/store/heroes.selectors';
 import { debounce, interval, map, Observable, Subject, Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-heroes-search',
-  templateUrl: './heroes-search.component.html',
-  styleUrls: ['./heroes-search.component.scss']
+  selector: 'app-menu-search',
+  templateUrl: './menu-search.component.html',
+  styleUrls: ['./menu-search.component.scss']
 })
 
-export class HeroesSearchComponent implements OnInit, OnDestroy {
+export class CoreMenuSearchComponent implements OnInit, OnDestroy {
 
   searchLoading$ = this.store.select(getHeroesSearchLoading);
   searchTerm$ = this.store.select(getHeroesSearchTerm);
@@ -37,7 +37,8 @@ export class HeroesSearchComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    private store: Store<{ heroes: State }>,
+    private store: Store,
+    private router: Router,
   )
   { }
 
@@ -57,8 +58,14 @@ export class HeroesSearchComponent implements OnInit, OnDestroy {
   }
 
   doSearch(term: string): void {
+
     if(term.length) {
       this.store.dispatch(heroesActions.heroesSearch({ term }))
+      
+      if(this.router.url !== '/heroes') {
+          this.router.navigate(['/heroes'])
+      }
+
     }
     else {
       this.store.dispatch(heroesActions.heroesSearchClean());

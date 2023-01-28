@@ -1,0 +1,11 @@
+<p-menubar [model]="items" class="core-menu">
+  <ng-template pTemplate="start">
+    <img routerLink="/home" src="assets/img/marvel.svg" height="40" class="mr-2 cursor-pointer"/>
+  </ng-template>
+  <ng-template pTemplate="end">
+    <div class="menu-end flex-row gap-3">
+      <app-menu-team></app-menu-team>
+      <app-menu-search></app-menu-search>
+    </div>
+  </ng-template>
+</p-menubar>

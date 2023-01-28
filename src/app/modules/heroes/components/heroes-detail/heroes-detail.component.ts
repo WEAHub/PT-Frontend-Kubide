@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
@@ -9,7 +9,7 @@ import { getHeroDetail, getHeroDetailComics, getHeroDetailLoading, getHeroDetail
 import * as teamActions from '../../../team/store/team.actions';
 import * as teamSelectors from '../../../team/store/team.selectors';
 import { ICharacter } from '../../models/heroes-api.model';
-import { take } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { ConfigService } from 'src/app/modules/shared/services/config/config.service';
 import { MessageService } from 'primeng/api';
 
@@ -19,9 +19,9 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./heroes-detail.component.scss']
 })
 
-export class HeroesDetailComponent {
+export class HeroesDetailComponent implements OnDestroy {
 
-  heroId = this.route.snapshot.paramMap.get('id')
+  heroId!: string
 
   getHeroDetail$ = this.store.select(getHeroDetail)
   getHeroDetailLoading$ = this.store.select(getHeroDetailLoading)
@@ -32,10 +32,15 @@ export class HeroesDetailComponent {
     { breakpoint: '1920px', numVisible: 4, numScroll: 2 },
     { breakpoint: '1280px', numVisible: 4, numScroll: 2 },
     { breakpoint: '1024px', numVisible: 3, numScroll: 2 },
-    { breakpoint: '768px', numVisible: 2, numScroll: 1 },
-    { breakpoint: '560px', numVisible: 1, numScroll: 1 }
+    { breakpoint: '768px', numVisible: 2, numScroll: 2.5 },
+    { breakpoint: '560px', numVisible: 1, numScroll: 3 }
   ];
 
+  paramSub: Subscription = this.route.params.subscribe(params => {
+    this.heroId = params['id']
+    this.loadHero();
+  }); 
+    
   constructor(
     private configService: ConfigService,
     private store: Store<{ heroes: State }>,
@@ -43,12 +48,14 @@ export class HeroesDetailComponent {
     private router: Router,
     private messageService: MessageService,
   )
-  { 
-    this.loadHero();
+  { }
+
+  ngOnDestroy(): void {
+    this.paramSub.unsubscribe()
   }
 
   loadHero() {
-
+    
     if(this.heroId) {
       this.store.dispatch(heroesActions.heroesDetail({ heroId: this.heroId }))
     }

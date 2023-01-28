@@ -1,0 +1,22 @@
+::ng-deep{
+  .p-menuitem-link-active {
+    background: rgba(0, 0, 0, 0.12);
+  }
+  .core-menu .p-menubar {
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 2;
+    top: 0px;
+    background: rgba(255, 255, 255, 0.925);
+    margin-bottom: 15px;
+  }
+}
+
+.menu-end {
+  display: none !important
+}
+@media (min-width: 824px) {
+  .menu-end {
+    display: flex !important
+  }
+}
