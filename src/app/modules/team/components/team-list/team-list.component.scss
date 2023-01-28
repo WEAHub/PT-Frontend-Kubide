@@ -10,43 +10,52 @@
     line-height: 1rem;
   }
 
+  .hero-image {
+    .p-element {
+      border-radius: 5px;
+      overflow: visible;
+      height: calc(100% - 4px)
+    }
+    .p-element > .p-image > img {
+      object-fit: cover;
+      border-radius: 5px;
+      width: 150px;
+      height: 150px;
+      
+    }
+
+    .p-image-preview-indicator {
+      border-radius: 5px;
+      height: calc(100% - 4px)
+    }
+  }
+
   .hero-table {
     
-    .hero-image {
-      .p-element {
-        border-radius: 5px;
-        overflow: visible;
-        height: calc(100% - 4px)
-      }
-      .p-element > .p-image > img {
-        object-fit: cover;
-        border-radius: 5px;
-        width: 150px;
-        height: 150px;
-        
-      }
-  
-      .p-image-preview-indicator {
-        border-radius: 5px;
-        height: calc(100% - 4px)
-      }
+
+    .hero-name {
+      font-family: "Marvel";
+      font-size: 2.5rem;
+      text-transform: uppercase;
+
     }
 
     .hero-description {
       .hero-desc-text {
-        max-width: 450px;
-        height: 100px;
+        max-width: 470px;
+        max-height: 115px;
       }
     }
 
     .stats-icon {
       font-size: 1.5rem;
-    }
+    } 
+
 
   } 
 
 }
 
 .hero-team-card {
-  max-width: 1500px;
+  max-width: 1200px;
 }

@@ -6,6 +6,7 @@ import { ImageModule } from 'primeng/image';
 import { BadgeModule } from 'primeng/badge';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MenubarModule } from 'primeng/menubar';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from "primeng/api";
@@ -16,10 +17,9 @@ import { AvatarModule } from 'primeng/avatar';
 import { TooltipModule } from 'primeng/tooltip';
 import { TableModule } from 'primeng/table';
 import { InplaceModule } from 'primeng/inplace';
-
+import { DialogModule } from 'primeng/dialog';
 @NgModule({
   exports: [
-    InputTextModule,
     SkeletonModule,
     CardModule,
     ImageModule,
@@ -33,7 +33,10 @@ import { InplaceModule } from 'primeng/inplace';
     AvatarModule,
     TooltipModule,
     TableModule,
-    InplaceModule
+    InplaceModule,
+    DialogModule,
+    InputTextareaModule,
+    InputTextModule,
   ],
   providers: [
     MessageService

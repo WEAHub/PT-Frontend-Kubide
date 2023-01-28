@@ -9,6 +9,8 @@ import * as teamSelectors from '../../store/team.selectors';
 import { MessageService } from 'primeng/api';
 import { ICharacter } from 'src/app/modules/heroes/models/heroes-api.model';
 import { take } from 'rxjs';
+import { ITeamCharacter } from '../../models/team.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-team-list',
@@ -20,9 +22,15 @@ export class TeamListComponent {
 
   getTeam$ = this.store.select(getTeam)
 
+  modifyHeroDialogOpts = {
+    hero: <ITeamCharacter>{},
+    visible: false,
+  }
+
   constructor(
     private store: Store<{ heroes: TeamState }>,
     private messageService: MessageService,
+    private router: Router,
   ) {
 
   }
@@ -51,4 +59,19 @@ export class TeamListComponent {
     this.messageService.clear('br');
     this.messageService.add({key: 'br', severity, summary: title, detail: message});
   }
+
+  modifyHero(hero: ITeamCharacter) {
+    this.modifyHeroDialogOpts.hero = hero;
+    this.modifyHeroDialogOpts.visible = true;
+  }
+  
+  onDialogClose(event: boolean) {
+    this.modifyHeroDialogOpts.visible = event;
+    this.saveTeam();
+  }
+
+  goHeroDetails(hero: ICharacter): void {
+    this.router.navigate(['/heroes/' + hero.id])
+  }
+
 }

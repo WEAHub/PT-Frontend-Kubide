@@ -11,10 +11,12 @@ import { SharedModules } from '../shared';
 import { ITeamCharacter } from './models/team.model';
 import { TeamEffects } from './store/team.effects';
 import { StorageService } from './services/storage.service';
+import { ModifyHeroComponent } from './components/modify-hero/modify-hero.component';
 
 @NgModule({
   declarations: [
-    TeamListComponent
+    TeamListComponent,
+    ModifyHeroComponent
   ],
   providers: [
     TeamService,

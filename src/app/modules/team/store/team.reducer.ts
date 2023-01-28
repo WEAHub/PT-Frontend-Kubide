@@ -29,6 +29,9 @@ const reducer = createReducer(
   on(teamActions.teamLocalLoadSuccess, (state, { heroes }) => {
     return teamAdapter.addMany(heroes, { ...state })
   }),
+  on(teamActions.teamModifyHero, (state, { id, changes }) => {
+    return teamAdapter.updateOne({id, changes}, { ...state })
+  })
 )
 
 const {

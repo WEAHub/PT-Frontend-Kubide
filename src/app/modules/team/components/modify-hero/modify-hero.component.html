@@ -1,0 +1,44 @@
+<p-dialog 
+[(visible)]="display"
+(onHide)="onHide()"
+(onShow)="onShow()"
+[modal]="true" 
+[responsive]="true">
+  <ng-template pTemplate="header">
+    <span>Modify hero</span>
+  </ng-template>
+  
+  <ng-template pTemplate="content">
+      <form [formGroup]="heroForm" class="m-4">
+
+        <div class="field">
+          <span class="p-float-label">
+            <input 
+            id="name" 
+            type="text" 
+            formControlName="name"
+            pInputText> 
+            <label for="name">Hero name</label>
+          </span>
+        </div>
+
+        <div class="field">
+          <span class="p-float-label">
+            <textarea  
+            pInputTextarea
+            cols="30"
+            rows="6"
+            id="description"  
+            formControlName="description"> 
+            </textarea>
+            <label for="description">Description</label>
+          </span>
+        </div>
+
+      </form>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button pButton class="p-button-sm" label="Save" (click)="modifyHero()"></button>
+  </ng-template>
+</p-dialog>

@@ -12,6 +12,8 @@ enum teamActions {
   LOAD_TEAM = '[TEAM] Team loaded from local storage',
   LOAD_TEAM_SUCCESS = '[TEAM] Team loaded from local storage success',
   LOAD_TEAM_SUCCESS_NO_HEROES = '[TEAM] No heroes in local storage'
+
+  
 }
 
 
@@ -27,7 +29,7 @@ const teamRemoveHero = createAction(
 
 const teamModifyHero = createAction(
   teamActions.MODIFY_TEAM_HERO,
-  props<{ heroId: number, update: ITeamCharacter }>()
+  props<{ id: number, changes: Partial<ITeamCharacter>}>()
 );
 
 
@@ -48,6 +50,7 @@ const teamLocalLoadSuccess = createAction(
 const teamLocalLoadNoHeroes = createAction(
   teamActions.LOAD_TEAM_SUCCESS_NO_HEROES,
 )
+
 
 export {
   teamAddHero,

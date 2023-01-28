@@ -2,20 +2,18 @@
 
 <div class="flex flex-column align-items-center gap-3">
   <p-card styleClass="p-card-shadow" class="sm:mobile hero-team-card w-full">
-    
     <ng-template pTemplate="content">
         <p-table 
         responsiveLayout="stack" 
         [breakpoint]="'960px'" 
-        [tableStyle]="{'min-width': '60rem'}"
+        [tableStyle]="{'min-width': '150px'}"
         styleClass="hero-table"
         [value]="(getTeam$ | async)!"
         >
           <ng-template pTemplate="header">
             <tr>
                 <th>Image</th>
-                <th>Name</th>
-                <th>Description</th>
+                <th>Name/Description</th>
                 <th>Stats</th>
                 <th>Date added</th>
                 <th>Date modified</th>
@@ -26,7 +24,7 @@
           </ng-template>
           <ng-template pTemplate="body" let-hero>
             <tr>
-              <td>
+              <td class="justify-content-center">
                 <div class="hero-image">
                   <p-image
                   imageClass="shadow-4"
@@ -35,34 +33,39 @@
                   [src]="hero.thumbnail.path + '.' + hero.thumbnail.extension" />
                 </div>
               </td>
-              <td>{{hero.name}}</td>
               <td>
-                <div class="hero-description">
-                  <p-scrollPanel styleClass="hero-desc-text">
-                    {{ 
-                    hero.description.length 
-                    ? hero.description 
-                    : 'No description available'
-                    }}
-                  </p-scrollPanel>
+                <div class="flex flex-column">
+                  <div class="hero-name"><span>{{hero.name}}</span></div>
+                  <div class="hero-description">
+                    <p-scrollPanel styleClass="hero-desc-text">
+                      {{ 
+                      hero.description.length 
+                      ? hero.description 
+                      : 'No description available'
+                      }}
+                    </p-scrollPanel>
+                  </div>
                 </div>
               </td>
-              <td>
-                <div class="flex flex-row gap-4 mb-3">
-                  <i class="pi pi-book stats-icon" [pTooltip]="hero.comics.available + ' Comics'" tooltipPosition="top" pBadge [value]="hero.comics.available"></i>
-                  <i class="pi pi-file-word stats-icon" [pTooltip]="hero.stories.available + ' Stories'" tooltipPosition="top" pBadge [value]="hero.stories.available"></i>
+              <td class="justify-content-center">
+                <div class="flex flex-row gap-4 md:flex-column lg:flex-column">
+                  <div class="flex flex-row gap-4 mb-3">
+                    <i class="pi pi-book stats-icon" [pTooltip]="hero.comics.available + ' Comics'" tooltipPosition="top" pBadge [value]="hero.comics.available"></i>
+                    <i class="pi pi-file-word stats-icon" [pTooltip]="hero.stories.available + ' Stories'" tooltipPosition="top" pBadge [value]="hero.stories.available"></i>
+                  </div>
+                  <div class="flex flex-row gap-4">
+                    <i class="pi pi-calendar stats-icon" [pTooltip]="hero.events.available + ' Events'" tooltipPosition="top" pBadge [value]="hero.events.available"></i>
+                    <i class="pi pi-video stats-icon" [pTooltip]="hero.series.available + ' Series'" tooltipPosition="top" pBadge [value]="hero.series.available"></i>
+                  </div>
                 </div>
-                <div class="flex flex-row gap-4">
-                  <i class="pi pi-calendar stats-icon" [pTooltip]="hero.events.available + ' Events'" tooltipPosition="top" pBadge [value]="hero.events.available"></i>
-                  <i class="pi pi-video stats-icon" [pTooltip]="hero.series.available + ' Series'" tooltipPosition="top" pBadge [value]="hero.series.available"></i>
-                </div>            
               </td>
-              <td><span [pTooltip]="(hero.modifiedDt | date :'short')!" tooltipPosition="top">{{hero.modifiedDt | dateAgo}}</span></td>
-              <td><span [pTooltip]="(hero.addedDt | date :'short')!" tooltipPosition="top">{{hero.addedDt | dateAgo}}</span></td>
-              <td>
-                <div class="flex flex-row flex-wrap">
-                  <button pButton pTooltip="Edit" tooltipPosition="top" class="mt-2 p-button-sm" icon="pi pi-user-edit"></button>                  
-                  <button pButton pTooltip="Delete" tooltipPosition="top" class="mt-2 p-button-sm p-button-danger" icon="pi pi-trash" (click)="removeFromTeam(hero)"></button>
+              <td class="justify-content-center"><span [pTooltip]="(hero.modifiedDt | date :'short')!" tooltipPosition="top">{{hero.modifiedDt | dateAgo}}</span></td>
+              <td class="justify-content-center"><span [pTooltip]="(hero.addedDt | date :'short')!" tooltipPosition="top">{{hero.addedDt | dateAgo}}</span></td>
+              <td class="justify-content-center">
+                <div class="flex flex-row flex-wrap gap-1">
+                  <button pButton pTooltip="View details" tooltipPosition="left" class="p-button-sm p-button-info" icon="pi pi-eye" (click)="goHeroDetails(hero)"></button>                  
+                  <button pButton pTooltip="Edit" tooltipPosition="left" class="p-button-sm" icon="pi pi-user-edit" (click)="modifyHero(hero)"></button>                  
+                  <button pButton pTooltip="Delete" tooltipPosition="left" class="p-button-sm p-button-danger" icon="pi pi-trash" (click)="removeFromTeam(hero)"></button>
                 </div>
               </td>
             </tr>
@@ -71,3 +74,10 @@
     </ng-template>
   </p-card>
 </div>
+
+
+<app-modify-hero 
+[display]="modifyHeroDialogOpts.visible"
+[hero]="modifyHeroDialogOpts.hero"
+(displayChange)="onDialogClose($event)"
+></app-modify-hero>
