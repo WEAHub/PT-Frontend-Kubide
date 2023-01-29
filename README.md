@@ -17,12 +17,12 @@
 ## Ejecutar el app
 Ejecute `ng serve` para un servidor de desarrollo. Navegue a `http://localhost:4200/`.
 
-## Lista de heroes
+## Lista de héroes
 <p align="center">
 <img src="https://github.com/WEAHub/PT-Frontend-Kubide/blob/master/preview/scroll.gif" width="800" align="center"/>
 </p>
 
-## Busqueda
+## Búsqueda
 <p align="center">
 <img src="https://github.com/WEAHub/PT-Frontend-Kubide/blob/master/preview/search.gif" width="800" align="center"/>
 </p>
@@ -32,17 +32,12 @@ Ejecute `ng serve` para un servidor de desarrollo. Navegue a `http://localhost:4
 <img src="https://github.com/WEAHub/PT-Frontend-Kubide/blob/master/preview/addteam.gif" width="800" align="center"/>
 </p>
 
-## Ver detalles del heroe
+## Ver detalles del héroe
 <p align="center">
 <img src="https://github.com/WEAHub/PT-Frontend-Kubide/blob/master/preview/viewdetails.gif" width="800" align="center"/>
 </p>
 
-## Gestion del equipo
+## Gestión del equipo
 <p align="center">
 <img src="https://github.com/WEAHub/PT-Frontend-Kubide/blob/master/preview/team.gif" width="800" align="center"/>
 </p>
-
-
-
-
-
