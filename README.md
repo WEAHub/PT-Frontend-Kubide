@@ -15,13 +15,24 @@
 - Se ha utilizado localStorage para guardar y recuperar parte del estado de la tienda NGRX para brindar una experiencia de usuario más eficiente.
 
 ## Ejecutar el app
-```js
+- Primero, es necesario tener instalado el CLI de Angular.
+```cmd
+npm install -g @angular/cli
+```
+- Si estás utilizando Windows tendrás que ejecutar este comando en PowerShell.
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+```
+- Ya estas listo para instalar y iniciar la app.
+
+```cmd
 git clone https://github.com/WEAHub/PT-Frontend-Kubide
 npm install
 ng serve
 ```
+
 - Para poder visualizar el app desde otros dispositivos.
-```js
+```cmd
 ng serve --host 0.0.0.0 --port 4200
 ```
 
