@@ -10,7 +10,7 @@
 
 ## Introducción
 - Aplicación web en Angular que brinda información sobre los héroes de Marvel y permite la creación de un equipo con ellos. 
-- La aplicación consume la <a href="https://developer.marvel.com/">API de Marvel</a> y almacena los datos obtenidos en un store con <a href="http://ngrx.io" target="_blank">NGRX</a> con <a href="https://v14.ngrx.io/guide/entity/adapter">adaptadores de entidad</a>.
+- La aplicación consume la <a href="https://developer.marvel.com/">API de Marvel</a> y almacena los datos obtenidos en un store usando <a href="http://ngrx.io" target="_blank">NGRX</a> con <a href="https://v14.ngrx.io/guide/entity/adapter">adaptadores de entidad</a>.
 - Se ha utilizado PrimeNG y PrimeFlex para brindar una experiencia de usuario atractiva con animaciones en las vistas.
 - Se ha utilizado localStorage para guardar y recuperar parte del estado del store NGRX para brindar una experiencia de usuario más eficiente.
 
