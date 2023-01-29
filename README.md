@@ -19,7 +19,7 @@
 ```cmd
 npm install -g @angular/cli
 ```
-- Si estás utilizando Windows tendrás que ejecutar este comando en PowerShell.
+- Si estás utilizando Windows posiblemente tengas que ejecutar este comando en PowerShell.
 ```powershell
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 ```
