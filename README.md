@@ -15,7 +15,15 @@
 - Se ha utilizado localStorage para guardar y recuperar parte del estado de la tienda NGRX para brindar una experiencia de usuario más eficiente.
 
 ## Ejecutar el app
-Ejecute `ng serve` para un servidor de desarrollo. Navegue a `http://localhost:4200/`.
+```js
+git clone https://github.com/WEAHub/PT-Frontend-Kubide
+npm install
+ng serve
+```
+- Para poder visualizar el app desde otros dispositivos.
+```js
+ng serve --host 0.0.0.0 --port 4200
+```
 
 ## Lista de héroes
 <p align="center">
