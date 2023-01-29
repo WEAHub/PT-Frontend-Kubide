@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { HeroesState } from '../heroes/store/entities/heroes.entity';
 import * as teamActions from '../team/store/team.actions';
-import * as heroesActions from '../heroes/store/heroes.actions';
 
 @Component({
   selector: 'app-root',

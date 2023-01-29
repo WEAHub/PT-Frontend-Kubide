@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
-import { RequestService } from '../../shared/services/http/http-request.service';
 import { ITeamCharacter } from '../models/team.model';
 
 @Injectable({

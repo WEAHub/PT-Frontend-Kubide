@@ -3,13 +3,15 @@ import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import { ICharacter } from 'src/app/modules/heroes/models/heroes-api.model';
+import { combineLatest, take } from 'rxjs';
+
+import { ICharacter } from '@modules/heroes/models/heroes-api.model';
 import { ITeamCharacter } from '../../models/team.model';
 import { TeamState } from '../../store/entities/team.entity';
+
 import * as heroesActions from '../../../heroes/store/heroes.actions';
 import * as teamActions from '../../store/team.actions';
 import * as teamSelectors from '../../store/team.selectors';
-import { combineLatest, forkJoin, take } from 'rxjs';
 
 @Component({
   selector: 'app-team-list',
@@ -46,9 +48,7 @@ export class TeamListComponent {
     private messageService: MessageService,
     private router: Router,
     private fb: FormBuilder
-  ) {
-
-  }
+  ) { }
 
   removeFromTeam(hero: ICharacter): void {
     this.store.dispatch(teamActions.teamRemoveHero({heroId: hero.id}))
@@ -77,13 +77,14 @@ export class TeamListComponent {
   }
   
   modifyTeam(): void {
-    combineLatest(
+    
+    combineLatest([
       this.store.select(teamSelectors.getTeamName),
       this.store.select(teamSelectors.getTeamDescription)
-    )
+    ])
     .pipe(take(1))
     .subscribe(([name, description]) => {
-      
+      console.log(name, description);
       this.modifyTeamDialogOpts = {
         visible: true,
         data: {
@@ -91,7 +92,6 @@ export class TeamListComponent {
           description
         }
       }
-
     })
   
   }

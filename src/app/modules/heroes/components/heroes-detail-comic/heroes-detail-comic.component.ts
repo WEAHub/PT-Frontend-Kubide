@@ -1,10 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { State } from '../../store/heroes.reducer';
-import * as heroesActions from '../../store/heroes.actions';
-import { getHeroesSearchLoading, getHeroesSearchTerm } from '../../store/heroes.selectors';
-import { Subscription } from 'rxjs';
+import { Component, Input } from '@angular/core';
 import { IComic } from '../../models/heroes-api.model';
 
 @Component({

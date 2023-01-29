@@ -20,6 +20,7 @@ const getHeroes = createSelector(
   selectHeroState,
   fromHeroes.selectHeroesAll
 )
+
 /* export const selectHeroesEntities = createSelector(
   selectHeroState,
   fromHeroes.selectHeroesEntities
@@ -44,6 +45,11 @@ const getHeroesTotal = createSelector(
 const getHeroesLoading = createSelector(
   selectHeroState,
   (state: HeroesState) => state.loading
+)
+
+const getHeroesError = createSelector(
+  selectHeroState,
+  (state: HeroesState) => state.error
 )
 
 const getHeroesSearchTerm = createSelector(
@@ -109,6 +115,7 @@ export {
   getHeroesLoading,
   getHeroesCount,
   getHeroesTotal,
+  getHeroesError,
 
   getHeroesSearch,
   getHeroesSearchTerm,

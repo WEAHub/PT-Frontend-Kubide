@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { ICharacter } from 'src/app/modules/heroes/models/heroes-api.model';
-import { getTeam } from 'src/app/modules/team/store/team.selectors';
+import { ICharacter } from '@modules/heroes/models/heroes-api.model';
+import { getTeam } from '@modules/team/store/team.selectors';
 
 @Component({
   selector: 'app-menu-team',
@@ -24,7 +24,6 @@ export class CoreMenuTeamComponent {
 
   goHeroDetails(hero: ICharacter): void {
     this.router.navigate(['/heroes/' + hero.id], {
-
       onSameUrlNavigation: 'reload'
     })
   }

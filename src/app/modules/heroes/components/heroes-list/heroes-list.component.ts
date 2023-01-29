@@ -2,19 +2,16 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { MessageService } from 'primeng/api';
-
 import { Subscription, take } from 'rxjs';
-import { ConfigService } from 'src/app/modules/shared/services/config/config.service';
+
+import { ConfigService } from '@shared/services/config/config.service';
 import { ICharacter } from '../../models/heroes-api.model';
-
-import * as heroesActions from '../../store/heroes.actions';
-import * as teamActions from '../../../team/store/team.actions';
-import * as teamSelectors from '../../../team/store/team.selectors';
-
 import { State } from '../../store/heroes.reducer';
 
-import { getHeroes, getHeroesCount, getHeroesLoading, getHeroesSearch, getHeroesSearchLoading, getHeroesSearchStatus, getHeroesSearchTerm, getHeroesTotal } from '../../store/heroes.selectors';
-
+import * as heroesActions from '../../store/heroes.actions';
+import * as heroesSelectors from '../../store/heroes.selectors';
+import * as teamActions from '../../../team/store/team.actions';
+import * as teamSelectors from '../../../team/store/team.selectors';
 
 @Component({
   selector: 'app-heroes-list',
@@ -23,20 +20,26 @@ import { getHeroes, getHeroesCount, getHeroesLoading, getHeroesSearch, getHeroes
 })
 export class HeroesListComponent implements OnInit, OnDestroy {
   
-  getHeroes$ = this.store.select(getHeroes)
-  getHeroesLoading$ = this.store.select(getHeroesLoading)
-  getHeroesTotal$ = this.store.select(getHeroesTotal)
-  getHeroesSearch$ = this.store.select(getHeroesSearch)
-  getHeroesSearchTerm$ = this.store.select(getHeroesSearchTerm)
-  getHeroesSearchStatus$ = this.store.select(getHeroesSearchStatus)
-  searchLoading$ = this.store.select(getHeroesSearchLoading);
-  
+  getHeroes$ = this.store.select(heroesSelectors.getHeroes)
+  getHeroesLoading$ = this.store.select(heroesSelectors.getHeroesLoading)
+  getHeroesTotal$ = this.store.select(heroesSelectors.getHeroesTotal)
+  getHeroesError$ = this.store.select(heroesSelectors.getHeroesError);
+  getHeroesSearch$ = this.store.select(heroesSelectors.getHeroesSearch)
+  getHeroesSearchTerm$ = this.store.select(heroesSelectors.getHeroesSearchTerm)
+  getHeroesSearchStatus$ = this.store.select(heroesSelectors.getHeroesSearchStatus)
+  searchLoading$ = this.store.select(heroesSelectors.getHeroesSearchLoading);
+
   virtualHeroes: ICharacter[] = []
   filteredHeroes: ICharacter[] = []
   totalHeroes!: number
   skeletonList: number[] = new Array(this.configService.apiLimit);
 
   searching: boolean = false;
+
+
+  getHeroesError: Subscription = this.getHeroesError$
+  .subscribe(error => this.showMessage(error, 'Error', 'danger'))
+
   getSearchStatusSub: Subscription = this.getHeroesSearchStatus$
   .subscribe(searching => this.searching = searching)
 
@@ -46,7 +49,7 @@ export class HeroesListComponent implements OnInit, OnDestroy {
     if(!heroes.length) return
 
     if(!this.totalHeroes) {
-      this.store.select(getHeroesTotal)
+      this.store.select(heroesSelectors.getHeroesTotal)
       .pipe(take(1))
       .subscribe(total => this.totalHeroes = total)
     }
@@ -72,7 +75,7 @@ export class HeroesListComponent implements OnInit, OnDestroy {
       this.loadHeroes();
     }
     else {
-      this.store.select(getHeroesSearchTerm)
+      this.store.select(heroesSelectors.getHeroesSearchTerm)
       .pipe(take(1))
       .subscribe(term => {
         if(term.length) {
@@ -97,7 +100,7 @@ export class HeroesListComponent implements OnInit, OnDestroy {
 
   onScroll(): void {
     if(this.searching) return
-    this.store.select(getHeroesCount)
+    this.store.select(heroesSelectors.getHeroesCount)
     .pipe(take(1))
     .subscribe(count => {
       if(this.totalHeroes > count) {

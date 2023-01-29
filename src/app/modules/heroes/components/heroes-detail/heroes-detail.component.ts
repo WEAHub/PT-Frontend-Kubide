@@ -1,17 +1,17 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { MessageService } from 'primeng/api';
+import { Subscription, take } from 'rxjs';
 
+import { ConfigService } from '@shared/services/config/config.service';
 import { State } from '../../store/heroes.reducer';
-import * as heroesActions from '../../store/heroes.actions';
-import { getHeroDetail, getHeroDetailComics, getHeroDetailLoading, getHeroDetailSeries } from '../../store/heroes.selectors';
+import { ICharacter } from '../../models/heroes-api.model';
 
+import * as heroesActions from '../../store/heroes.actions';
+import * as heroesSelectors from '../../store/heroes.selectors';
 import * as teamActions from '../../../team/store/team.actions';
 import * as teamSelectors from '../../../team/store/team.selectors';
-import { ICharacter } from '../../models/heroes-api.model';
-import { Subscription, take } from 'rxjs';
-import { ConfigService } from 'src/app/modules/shared/services/config/config.service';
-import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-heroes-detail',
@@ -23,10 +23,11 @@ export class HeroesDetailComponent implements OnDestroy {
 
   heroId!: string
 
-  getHeroDetail$ = this.store.select(getHeroDetail)
-  getHeroDetailLoading$ = this.store.select(getHeroDetailLoading)
-  getHeroDetailComics$ = this.store.select(getHeroDetailComics)
-  getHeroDetailSeries$ = this.store.select(getHeroDetailSeries)
+  getHeroDetail$ = this.store.select(heroesSelectors.getHeroDetail)
+  getHeroDetailLoading$ = this.store.select(heroesSelectors.getHeroDetailLoading)
+  getHeroDetailComics$ = this.store.select(heroesSelectors.getHeroDetailComics)
+  getHeroDetailSeries$ = this.store.select(heroesSelectors.getHeroDetailSeries)
+  getHeroError$ = this.store.select(heroesSelectors.getHeroDetailError)
 
   carrouselResponsive = [
     { breakpoint: '1920px', numVisible: 4, numScroll: 2 },

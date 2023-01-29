@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import * as heroesActions from '../../../heroes/store/heroes.actions';
-import { getHeroesSearchLoading, getHeroesSearchTerm } from '../../../heroes/store/heroes.selectors';
 import { debounce, interval, map, Observable, Subject, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+
+import * as heroesActions from '@modules/heroes/store/heroes.actions';
+import * as heroesSelectors from '@modules/heroes/store/heroes.selectors';
 
 @Component({
   selector: 'app-menu-search',
@@ -14,8 +15,8 @@ import { Router } from '@angular/router';
 
 export class CoreMenuSearchComponent implements OnInit, OnDestroy {
 
-  searchLoading$ = this.store.select(getHeroesSearchLoading);
-  searchTerm$ = this.store.select(getHeroesSearchTerm);
+  searchLoading$ = this.store.select(heroesSelectors.getHeroesSearchLoading);
+  searchTerm$ = this.store.select(heroesSelectors.getHeroesSearchTerm);
 
   searchTermSub: Subscription = this.searchTerm$
   .subscribe(term => this.term = term)
