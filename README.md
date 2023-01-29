@@ -1,27 +1,48 @@
-# Frontend
+<p align="center">
+  <a href="http://kubide.io/" target="blank"> <img src="https://adalab.es/wp-content/uploads/2022/09/logo_0000s_0036_Kubide.png" width="150" alt="Kubide logo" /></a>
+  <a href="http://angular.io" target="blank"><img src="https://raw.githubusercontent.com/WEAHub/PT-Frontend-Kubide/master/preview/angular.png" width="60" alt="Angular Logo" /></a>
+  <a href="https://ngrx.io/" target="blank"><img src="https://raw.githubusercontent.com/WEAHub/PT-Frontend-Kubide/master/preview/ngrx.png" width="60" alt="Ngrx Logo" /></a>
+  <a href="https://www.primefaces.org/primeng/" target="blank"><img src="https://raw.githubusercontent.com/WEAHub/PT-Frontend-Kubide/master/preview/primeng.svg" width="210" alt="Primeng Logo" /></a>
+  <a href="http://kubide.io/" target="blank"> <img src="https://kubide.es/wp-content/uploads/2016/06/logotipo-blanco-300.png" width="160" alt="Kubide logo" /></a>
+</p>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.2.
+<p align="center">Prueba tecnica desarrollada con <a href="http://angular.io" target="_blank">Angular v15.1</a> • <a href="http://ngrx.io" target="_blank">NGRX</a> • <a href="https://www.primefaces.org/primeng/" target="_blank">PrimeNG</a> • <a href="https://www.primeflex.org/" target="_blank">Primeflex</a></p>
 
-## Development server
+## Introducción
+- Aplicación web en Angular que brinda información sobre los héroes de Marvel y permite la creación de un equipo con ellos. 
+- La aplicación consume la <a href="https://developer.marvel.com/">API de Marvel</a> y almacena los datos obtenidos en una tienda <a href="http://ngrx.io" target="_blank">NGRX</a> con <a href="https://v14.ngrx.io/guide/entity/adapter">adaptadores de entidad</a>.
+- Se ha utilizado PrimeNG y PrimeFlex para brindar una experiencia de usuario atractiva con animaciones en las vistas.
+- Se ha utilizado localStorage para guardar y recuperar parte del estado de la tienda NGRX para brindar una experiencia de usuario más eficiente.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Ejecutar el app
+Ejecute `ng serve` para un servidor de desarrollo. Navegue a `http://localhost:4200/`.
 
-## Code scaffolding
+## Lista de heroes
+<p align="center">
+<img src="https://github.com/WEAHub/PT-Frontend-Kubide/blob/master/preview/scroll.gif" width="800" align="center"/>
+</p>
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Busqueda
+<p align="center">
+<img src="https://github.com/WEAHub/PT-Frontend-Kubide/blob/master/preview/search.gif" width="800" align="center"/>
+</p>
 
-## Build
+## Añadir al equipo
+<p align="center">
+<img src="https://github.com/WEAHub/PT-Frontend-Kubide/blob/master/preview/addteam.gif" width="800" align="center"/>
+</p>
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Ver detalles del heroe
+<p align="center">
+<img src="https://github.com/WEAHub/PT-Frontend-Kubide/blob/master/preview/viewdetails.gif" width="800" align="center"/>
+</p>
 
-## Running unit tests
+## Gestion del equipo
+<p align="center">
+<img src="https://github.com/WEAHub/PT-Frontend-Kubide/blob/master/preview/team.gif" width="800" align="center"/>
+</p>
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
